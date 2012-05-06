@@ -67,6 +67,7 @@ public class CMDguestunlock implements Command{
 	@Override
 	public void onCommandHelp(Player p) {
 		p.sendMessage(ChatColor.BLUE + "Usage: /<command> <password>");
+		p.sendMessage(ChatColor.BOLD + "Example: '/guestunlock hello' this would send the password: hello, to the moderators.");
 		return;
 	}
 	

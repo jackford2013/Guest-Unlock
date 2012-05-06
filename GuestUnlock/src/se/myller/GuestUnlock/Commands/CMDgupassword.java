@@ -28,6 +28,7 @@ public class CMDgupassword implements Command {
 	@Override
 	public void onCommandHelp(Player p) {
 		p.sendMessage(ChatColor.BLUE + "Usage: /<command> <new password>");
+		p.sendMessage(ChatColor.BOLD + "Example: '/gupassword hello' this would set the password to: hello");
 		return;
 	}
 		
