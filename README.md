@@ -14,6 +14,7 @@ GuestUnlock supports:
  * GroupManager
 _____________________________________________________________________________________________________________________ 
 GuestUnlock - a bukkit plugin
+
 Copyright (C) 2012 Mylleranton
 
 This program is free software: you can redistribute it and/or modify
