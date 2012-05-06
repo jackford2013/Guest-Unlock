@@ -30,24 +30,24 @@ import se.myller.GuestUnlock.Permission.PermbPermissions;
 public class Main extends JavaPlugin {
 	
 	
-	// Our variables:
+		// Our variables:
 		public static Main plugin;
-	// Log
+		// Log
 		public Logger log;
-	// Config
+		// Config
 		public FileConfiguration config;
-	// Repeater
+		// Repeater
 		public static int tid = 0;
 		public static long interval;
-    // PluginManager
+		// PluginManager
 		public PluginManager pm;
-    // Different permissionplugins
+		// Different permissionplugins
 		public GroupManager groupManager;
 		public PermGroupManager pgm;
 		public PermbPermissions pbp;
 		public PermPermissionsEx ppe;
     
-    // Commands
+		// Commands
     	public CMDguestunlock cgu = new CMDguestunlock(this);
     	public CMDgupassword cgp = new CMDgupassword(this);
     	public CMDgutest cgt = new CMDgutest(this);
