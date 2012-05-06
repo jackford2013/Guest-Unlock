@@ -39,10 +39,6 @@ public class Main extends JavaPlugin {
 	// Repeater
 	public static int tid = 0;
 	public static long interval;
-	// Commands
-	public CMDguestunlock cgu = new CMDguestunlock(this);
-    public CMDgupassword cgp = new CMDgupassword(this);
-    public CMDgutest cgt = new CMDgutest(this);
     // PluginManager
     public PluginManager pm;
     // Different permissionplugins
@@ -50,6 +46,11 @@ public class Main extends JavaPlugin {
     public PermGroupManager pgm;
     public PermbPermissions pbp;
     public PermPermissionsEx ppe;
+    
+    	// Commands
+ 		public CMDguestunlock cgu = new CMDguestunlock(this);
+        public CMDgupassword cgp = new CMDgupassword(this);
+    	public CMDgutest cgt = new CMDgutest(this);
 
 	
 	/*
