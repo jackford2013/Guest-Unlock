@@ -1,8 +1,10 @@
 package se.myller.GuestUnlock;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 
@@ -60,8 +62,20 @@ public class CommandExcecutor implements CommandExecutor {
 					return true;
 				}
 			}
+		} else if (sender instanceof ConsoleCommandSender) {
+			if (cmdname.equalsIgnoreCase("gupassword") && args.length == 1) {
+				plugin.cgp.setPwd(sender, args[0]);
+				return true;
+			} else if (cmdname.equalsIgnoreCase("gutest")) {
+				plugin.cgt.onCommand(sender);
+				return true;
+			} else {
+				sender.sendMessage(ChatColor.RED + "[GuestUnlock] Must be a player to perform that command!");
+				return true;
+			}
 		} else {
-			plugin.log.info("[GuestUnlock] Expected a player!");
+			sender.sendMessage(ChatColor.RED + "[GuestUnlock] Error!");
+			plugin.log.info("[GuestUnlock] Error!");
 			return true;
 		}
 		return false;
