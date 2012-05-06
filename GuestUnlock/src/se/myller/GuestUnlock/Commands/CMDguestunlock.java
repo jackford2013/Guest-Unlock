@@ -9,7 +9,6 @@ import se.myller.GuestUnlock.Main;
 
 public class CMDguestunlock implements Command{
 
-	
 	private Main plugin;
 	
 	public CMDguestunlock(Main instance) {
@@ -25,10 +24,15 @@ public class CMDguestunlock implements Command{
 		s.sendMessage(ChatColor.GREEN + plugin.config.getString("Guest.Responds.Correct"));
 		plugin.log.info("[GuestUnlock] " + s.getName() + " has sent the correct password!");
 		Player[] players = plugin.getServer().getOnlinePlayers();
+		int foundModerators = 0;
 		for (Player p: players) {
 			if (p.hasPermission("GuestUnlock.moderator")) {
+				foundModerators++;
 				p.sendMessage(ChatColor.BLUE + "The player " + ChatColor.YELLOW + s.getName() + ChatColor.BLUE + " sent the correct password, " + ChatColor.GREEN + pwd);			
 			}
+		}
+		if (foundModerators < 1) {
+			s.sendMessage(ChatColor.RED + "[GuestUnlock] You typed the correct password but no moderators was online, please try again when someone logs on!");
 		}
 		if (plugin.config.getBoolean("Permissions.PermissionsEx.Enable") == true ) {
 			Player player = (Player)s; 
