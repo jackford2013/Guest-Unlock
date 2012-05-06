@@ -31,25 +31,25 @@ public class Main extends JavaPlugin {
 	
 	
 	// Our variables:
-	public static Main plugin;
+		public static Main plugin;
 	// Log
-	public Logger log;
+		public Logger log;
 	// Config
-	public FileConfiguration config;
+		public FileConfiguration config;
 	// Repeater
-	public static int tid = 0;
-	public static long interval;
+		public static int tid = 0;
+		public static long interval;
     // PluginManager
-    public PluginManager pm;
+		public PluginManager pm;
     // Different permissionplugins
-    public GroupManager groupManager;
-    public PermGroupManager pgm;
-    public PermbPermissions pbp;
-    public PermPermissionsEx ppe;
+		public GroupManager groupManager;
+		public PermGroupManager pgm;
+		public PermbPermissions pbp;
+		public PermPermissionsEx ppe;
     
-    	// Commands
- 		public CMDguestunlock cgu = new CMDguestunlock(this);
-        public CMDgupassword cgp = new CMDgupassword(this);
+    // Commands
+    	public CMDguestunlock cgu = new CMDguestunlock(this);
+    	public CMDgupassword cgp = new CMDgupassword(this);
     	public CMDgutest cgt = new CMDgutest(this);
 
 	
