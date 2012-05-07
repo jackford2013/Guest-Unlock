@@ -33,6 +33,10 @@ public class CMDguestunlock implements Command{
 		}
 		if (foundModerators < 1) {
 			s.sendMessage(ChatColor.RED + "[GuestUnlock] You typed the correct password but no moderators was online, please try again when someone logs on!");
+		} else if (foundModerators == 1) {
+			s.sendMessage(ChatColor.GREEN + "[GuestUnlock] There is one moderator online, he will check your password shortly.");
+		} else {
+			s.sendMessage(ChatColor.GREEN + "[GuestUnlock] There is multiple moderators online, they will check you password shortly.");
 		}
 		if (plugin.config.getBoolean("Permissions.PermissionsEx.Enable") == true ) {
 			Player player = (Player)s; 
