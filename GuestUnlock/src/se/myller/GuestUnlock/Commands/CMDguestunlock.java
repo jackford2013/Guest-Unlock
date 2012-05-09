@@ -28,15 +28,15 @@ public class CMDguestunlock implements Command{
 		for (Player p: players) {
 			if (p.hasPermission("GuestUnlock.moderator")) {
 				foundModerators++;
-				p.sendMessage(ChatColor.BLUE + "The player " + ChatColor.YELLOW + s.getName() + ChatColor.BLUE + " sent the correct password, " + ChatColor.GREEN + pwd);			
+				p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "The player " + ChatColor.YELLOW + s.getName() + ChatColor.BOLD + " sent the correct password, " + ChatColor.GREEN + pwd);			
 			}
 		}
 		if (foundModerators < 1) {
 			s.sendMessage(ChatColor.RED + "[GuestUnlock] You typed the correct password but no moderators was online, please try again when someone logs on!");
 		} else if (foundModerators == 1) {
-			s.sendMessage(ChatColor.GREEN + "[GuestUnlock] There is one moderator online, he will check your password shortly.");
+			s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "There is one moderator online, he will check your password shortly.");
 		} else {
-			s.sendMessage(ChatColor.GREEN + "[GuestUnlock] There is multiple moderators online, they will check you password shortly.");
+			s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "There is multiple moderators online, they will check you password shortly.");
 		}
 		if (plugin.config.getBoolean("Permissions.PermissionsEx.Enable") == true ) {
 			Player player = (Player)s; 
@@ -59,7 +59,7 @@ public class CMDguestunlock implements Command{
 			Player[] players = plugin.getServer().getOnlinePlayers();
 			for (Player player: players) {
 				if(player.hasPermission("GuestUnlock.moderator")) {
-					player.sendMessage(ChatColor.RED + "The player " + ChatColor.YELLOW + s.getName() + ChatColor.RED + " tried to send this password: " + ChatColor.DARK_RED + pwd);	
+					player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "The player " + ChatColor.YELLOW + s.getName() + ChatColor.BOLD + " tried to send this password: " + ChatColor.RED + pwd);	
 				}
 			}
 			return true;		
@@ -75,7 +75,7 @@ public class CMDguestunlock implements Command{
 	@Override
 	public void onCommandHelp(Player p) {
 		p.sendMessage(ChatColor.BLUE + "Usage: /<command> <password>");
-		p.sendMessage(ChatColor.BOLD + "Example: '/guestunlock hello' this would send the password: hello, to the moderators.");
+		p.sendMessage(ChatColor.BLUE + "Example: '/guestunlock hello' this would send the password: hello, to the moderators.");
 		return;
 	}
 	

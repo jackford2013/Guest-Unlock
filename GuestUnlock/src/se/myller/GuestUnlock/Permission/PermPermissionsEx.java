@@ -51,11 +51,11 @@ public class PermPermissionsEx {
 			if (pg.toString().equals((plugin.config.getString("Permissions.PermissionsEx.Group.Default")))) {
 				user.setGroups(new String[] { plugin.config.getString("Permissions.PermissionsEx.Group") });
 				plugin.log.info("[GuestUnlock] Set " + name + ":s group to " + plugin.config.getString("Permissions.PermissionsEx.Group"));
-				player.sendMessage(ChatColor.GREEN + "Your group is now " + plugin.config.getString("Permissions.PermissionsEx.Group"));
-			} else {
-				player.sendMessage(ChatColor.RED + "[GuestUnlock] Haha, tricky one, you doesnt belong to the default group!");
-			}
-		}	
+				player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "Your group is now " + plugin.config.getString("Permissions.PermissionsEx.Group"));
+				return;
+			} 
+		}
+			player.sendMessage(ChatColor.AQUA + "[GuestUnlock]" + ChatColor.RED + "Haha, tricky one, you doesnt belong to the default group!");
 	}
 	
 }

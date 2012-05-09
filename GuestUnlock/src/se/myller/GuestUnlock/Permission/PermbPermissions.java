@@ -46,9 +46,9 @@ public class PermbPermissions {
 		if (ApiLayer.hasGroup(p.getWorld().getName(), CalculableType.USER, p.getName(), plugin.config.getString("Permissions.bPermissions.Group.Default"))) {
 			ApiLayer.setGroup(p.getWorld().getName(), CalculableType.USER, p.getName(), plugin.config.getString("Permissions.bPermissions.Group.Build"));
 			plugin.log.info("[GuestUnlock] Set " + p.getName() + ":s group to " + plugin.config.getString("Permissions.bPermissions.Group.Build"));
-			p.sendMessage(ChatColor.GREEN + "Your group is now " + plugin.config.getString("Permissions.bPermissions.Group.Build"));
+			p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "Your group is now " + plugin.config.getString("Permissions.bPermissions.Group.Build"));
 		} else {
-			p.sendMessage(ChatColor.RED + "[GuestUnlock] Haha, tricky one, you doesnt belong to the default group!");
+			p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.RED +  "Haha, tricky one, you doesnt belong to the default group!");
 		}
 	}
 	

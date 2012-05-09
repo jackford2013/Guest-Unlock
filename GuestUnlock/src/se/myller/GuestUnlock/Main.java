@@ -213,7 +213,7 @@ public class Main extends JavaPlugin {
 		for (Player player: players) {
 			if (player.hasPermission("GuestUnlock.guest") && !player.hasPermission("GuestUnlock.moderator")) {
 					if (config.getBoolean("Guest.RepeatingMessage.UseJoinMessage") == true) { 
-					player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + config.getString("Guest.Join.Message"));
+						player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + config.getString("Guest.Join.Message"));
 					} else {
 						player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + config.getString("Guest.RepeatMessage.RepeatMessage"));
 					}

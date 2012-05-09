@@ -17,7 +17,7 @@ public class CMDgupassword implements Command {
 	public boolean setPwd(CommandSender s, String newPwd) {
 		plugin.config.set("Admin.Password", newPwd);
 		plugin.saveConfig();
-		s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "Password changed to: " + ChatColor.RED + newPwd);
+		s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "Password changed to: " + ChatColor.RED + newPwd);
 		Player[] players = plugin.getServer().getOnlinePlayers();
 		for (Player p : players) {
 			if (p.hasPermission("GuestUnlock.admin")) {
@@ -34,7 +34,7 @@ public class CMDgupassword implements Command {
 	@Override
 	public void onCommandHelp(Player p) {
 		p.sendMessage(ChatColor.BLUE + "Usage: /<command> <new password>");
-		p.sendMessage(ChatColor.BOLD + "Example: '/gupassword hello' this would set the password to: hello");
+		p.sendMessage(ChatColor.BLUE + "Example: '/gupassword hello' this would set the password to: hello");
 		return;
 	}
 		

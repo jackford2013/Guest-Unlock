@@ -52,12 +52,12 @@ public class PermGroupManager {
 		if (handler.getUser(base.getName()).getGroupName().equals("Permissions.GroupManager.Group.Default")) {
 			handler.getUser(base.getName()).setGroup(handler.getGroup(plugin.config.getString("Permissions.GroupManager.Group.Build")));
 			plugin.log.info("[GuestUnlock] Set " + base.getName() + ":s group to " + plugin.config.getString("Permissions.GroupManager.Group.Build"));
-			base.sendMessage(ChatColor.GREEN + "Your group is now " + plugin.config.getString("Permissions.GroupManager.Group.Build"));
+			base.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "Your group is now " + plugin.config.getString("Permissions.GroupManager.Group.Build"));
 			handler.reloadGroups();
 			handler.reloadUsers();
 			return true;
 		} else {
-			base.sendMessage(ChatColor.RED + "[GuestUnlock] Haha, tricky one, you doesnt belong to the default group!");
+			base.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.RED + "Haha, tricky one, you doesnt belong to the default group!");
 		}
 		return false;
 		
