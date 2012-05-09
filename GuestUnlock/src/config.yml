@@ -23,6 +23,7 @@ Admin:
     Password: GuestUnlock
     SendIncorrectMessageToMods: false
 Permissions:
+    SendMessageOnGroupChange: true
     PermissionsEx:
         Group:
             Build: builder
@@ -61,12 +62,13 @@ Permissions:
 # ADMIN
     # Password: string, the correct password.
     # SendIncorrectMessageToMods: boolean, send a message to moderators when a player sends the wrong password?
-    
-# PERMISSIONEX/GROUPMANAGER/BPERMISSIONS
-    # Group: 
-        # Default: string, The group the player has to be in to be moved to the build group
-        # Build: string, The group the player are moved to when sending the correct password
-    # Enable: boolean, If this function shall be enabled 
+# PERMISSIONS:    
+    # SendMessageOnGroupChange: boolean, Send a message to moderators online when a player sends the correct password and is moved to the build group
+    # PERMISSIONEX/GROUPMANAGER/BPERMISSIONS
+        # Group: 
+            # Default: string, The group the player has to be in to be moved to the build group
+            # Build: string, The group the player are moved to when sending the correct password
+        # Enable: boolean, If this function shall be enabled 
     
 ################################################
 ###########        Datatypes         ###########

@@ -47,6 +47,14 @@ public class PermbPermissions {
 			ApiLayer.setGroup(p.getWorld().getName(), CalculableType.USER, p.getName(), plugin.config.getString("Permissions.bPermissions.Group.Build"));
 			plugin.log.info("[GuestUnlock] Set " + p.getName() + ":s group to " + plugin.config.getString("Permissions.bPermissions.Group.Build"));
 			p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "Your group is now " + plugin.config.getString("Permissions.bPermissions.Group.Build"));
+			if (plugin.config.getBoolean("Permissions.SendMessageOnGroupChange") == true ) {
+				Player[] players = plugin.getServer().getOnlinePlayers();
+				for (Player player : players) {
+					if (player.hasPermission("GuestUnlock.moderator")) {
+						player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "The player: " + ChatColor.YELLOW + player.getName() + ChatColor.BOLD + " was moved to the build-group.");
+					}
+				}
+			}
 		} else {
 			p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.RED +  "Haha, tricky one, you doesnt belong to the default group!");
 		}
