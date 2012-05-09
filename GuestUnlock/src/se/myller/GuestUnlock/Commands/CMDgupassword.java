@@ -18,6 +18,12 @@ public class CMDgupassword implements Command {
 		plugin.config.set("Admin.Password", newPwd);
 		plugin.saveConfig();
 		s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "Password changed to: " + ChatColor.RED + newPwd);
+		Player[] players = plugin.getServer().getOnlinePlayers();
+		for (Player p : players) {
+			if (p.hasPermission("GuestUnlock.admin")) {
+				p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.YELLOW + p.getName() + ChatColor.BOLD + " has changed the password to: " + ChatColor.RED + newPwd);
+			}
+		}
 		return true;
 	}
 	@Override
