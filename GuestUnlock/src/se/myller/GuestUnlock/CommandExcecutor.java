@@ -31,21 +31,27 @@ public class CommandExcecutor implements CommandExecutor {
 			if (cmdname.equalsIgnoreCase("gutest")) {
 				plugin.cgt.onCommand(sender);
 			}
-			else if (cmdname.equalsIgnoreCase("guestunlock") && args.length == 0) {
-				plugin.cgu.onCommandFail((Player) sender);
-				return true;
+			else if (args.length == 0) {
+				if (cmdname.equalsIgnoreCase("guestunlock")) {
+					plugin.cgu.onCommandFail((Player) sender);
+					return true;
+				}
+				else if (cmdname.equalsIgnoreCase("gupassword")) {
+					plugin.cgp.onCommandFail((Player) sender);
+					return true;
+				}
+				return false;
 			}
-			else if (cmdname.equalsIgnoreCase("gupassword") && args.length == 0) {
-				plugin.cgp.onCommandFail((Player) sender);
-				return true;
-			}
-			else if (cmdname.equalsIgnoreCase("guestunlock") && args[0].equals("help")) {
-				plugin.cgu.onCommandHelp((Player)sender);
-				return true;
-			}
-			else if (cmdname.equalsIgnoreCase("gupassword") && args[0].equals("help")) {
-				plugin.cgu.onCommandHelp((Player)sender);
-				return true;
+			else if (args[0].equals("help")) {
+				if (cmdname.equalsIgnoreCase("guestunlock")) {
+					plugin.cgu.onCommandHelp((Player)sender);
+					return true;
+				}
+				else if (cmdname.equalsIgnoreCase("gupassword")) {
+					plugin.cgp.onCommandHelp((Player)sender);
+					return true;
+				}
+				return false;
 			}
 			else if (sender.hasPermission("GuestUnlock.guest") && cmdname.equalsIgnoreCase("guestunlock")) {
 				if  (args[0].equals(plugin.getConfig().getString("Admin.Password")) && args.length == 1) {
