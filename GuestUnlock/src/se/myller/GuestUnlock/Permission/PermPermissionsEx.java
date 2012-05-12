@@ -52,6 +52,14 @@ public class PermPermissionsEx {
 				user.setGroups(new String[] { plugin.config.getString("Permissions.PermissionsEx.Group") });
 				plugin.log.info("[GuestUnlock] Set " + name + ":s group to " + plugin.config.getString("Permissions.PermissionsEx.Group"));
 				player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "Your group is now " + plugin.config.getString("Permissions.PermissionsEx.Group"));
+				if (plugin.config.getBoolean("Permissions.SendMessageOnGroupChange") == true ) {
+					Player[] players = plugin.getServer().getOnlinePlayers();
+					for (Player p : players) {
+						if (p.hasPermission("GuestUnlock.moderator")) {
+							p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "The player: " + ChatColor.YELLOW + p.getName() + ChatColor.BOLD + " was moved to the build-group.");
+						}
+					}
+				}
 				return;
 			} 
 		}
