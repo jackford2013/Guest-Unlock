@@ -93,7 +93,7 @@ public class Main extends JavaPlugin {
 		log.info("[GuestUnlock] =====   Checking password");
 		log.info("[GuestUnlock] =====   PWD: " + config.getString("Admin.Password"));
 		log.info("[GuestUnlock] =====   Password OK");
-		log.info("[GuestUnlock] =====   Lets see if you want auto-group moving!");
+		log.info("[GuestUnlock] =====   Lets see if you want auto-group moving");
 		
 		// Register our events
 		pm = getServer().getPluginManager();
@@ -136,7 +136,7 @@ public class Main extends JavaPlugin {
 				pbp.getBP();
 				}
 		} else {
-			log.info("[GuestUnlock] =====   You didn´t want auto-group moving enabled!");
+			log.info("[GuestUnlock] =====   You didnot want auto-group moving enabled!");
 		}
 		
 		log.info("[GuestUnlock] ==================================");

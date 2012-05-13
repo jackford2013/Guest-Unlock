@@ -17,11 +17,11 @@ public class CMDgupassword implements Command {
 	public boolean setPwd(CommandSender s, String newPwd) {
 		plugin.config.set("Admin.Password", newPwd);
 		plugin.saveConfig();
-		s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "Password changed to: " + ChatColor.RED + newPwd);
+		s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.YELLOW + "Password changed to: " + ChatColor.DARK_AQUA + newPwd);
 		Player[] players = plugin.getServer().getOnlinePlayers();
 		for (Player p : players) {
 			if (p.hasPermission("GuestUnlock.admin")) {
-				p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.YELLOW + p.getName() + ChatColor.BOLD + " has changed the password to: " + ChatColor.RED + newPwd);
+				p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + " has changed the password to: " + ChatColor.DARK_AQUA + newPwd);
 			}
 		}
 		return true;

@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import se.myller.GuestUnlock.Main;
 
 
-public class CMDguestunlock implements Command{
+public class CMDguestunlock implements Command {
 
 	private Main plugin;
 	
@@ -28,15 +28,15 @@ public class CMDguestunlock implements Command{
 		for (Player p: players) {
 			if (p.hasPermission("GuestUnlock.moderator")) {
 				foundModerators++;
-				p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "The player " + ChatColor.YELLOW + s.getName() + ChatColor.BOLD + " sent the correct password, " + ChatColor.GREEN + pwd);			
+				p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "The player " + ChatColor.YELLOW + s.getName() + ChatColor.GREEN + " sent the correct password, " + ChatColor.DARK_AQUA + pwd);			
 			}
 		}
 		if (foundModerators < 1) {
 			s.sendMessage(ChatColor.RED + "[GuestUnlock] You typed the correct password but no moderators was online, please try again when someone logs on!");
 		} else if (foundModerators == 1) {
-			s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "There is one moderator online, he will check your password shortly.");
+			s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BLUE + "There is one moderator online, he will check your password shortly.");
 		} else {
-			s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "There is multiple moderators online, they will check you password shortly.");
+			s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BLUE + "There is multiple moderators online, they will check you password shortly.");
 		}
 		if (plugin.config.getBoolean("Permissions.PermissionsEx.Enable") == true ) {
 			Player player = (Player)s; 
@@ -59,7 +59,7 @@ public class CMDguestunlock implements Command{
 			Player[] players = plugin.getServer().getOnlinePlayers();
 			for (Player player: players) {
 				if(player.hasPermission("GuestUnlock.moderator")) {
-					player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "The player " + ChatColor.YELLOW + s.getName() + ChatColor.BOLD + " tried to send this password: " + ChatColor.RED + pwd);	
+					player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.RED + "The player " + ChatColor.YELLOW + s.getName() + ChatColor.RED + " tried to send this password: " + ChatColor.DARK_AQUA + pwd);	
 				}
 			}
 			return true;		

@@ -59,7 +59,7 @@ public class PermGroupManager {
 				Player[] players = plugin.getServer().getOnlinePlayers();
 				for (Player player : players) {
 					if (player.hasPermission("GuestUnlock.moderator")) {
-						player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "The player: " + ChatColor.YELLOW + player.getName() + ChatColor.BOLD + " was moved to the build-group.");
+						player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "The player: " + ChatColor.YELLOW + player.getName() + ChatColor.GREEN + " was moved to the build-group.");
 					}
 				}
 			}

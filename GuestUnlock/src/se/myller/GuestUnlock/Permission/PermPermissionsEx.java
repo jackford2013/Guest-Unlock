@@ -56,7 +56,7 @@ public class PermPermissionsEx {
 					Player[] players = plugin.getServer().getOnlinePlayers();
 					for (Player p : players) {
 						if (p.hasPermission("GuestUnlock.moderator")) {
-							p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BOLD + "The player: " + ChatColor.YELLOW + p.getName() + ChatColor.BOLD + " was moved to the build-group.");
+							p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "The player: " + ChatColor.YELLOW + p.getName() + ChatColor.GREEN + " was moved to the build-group.");
 						}
 					}
 				}
