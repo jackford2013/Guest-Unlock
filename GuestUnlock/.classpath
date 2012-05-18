@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/eclipse/lib/PermissionsEx.jar"/>
-	<classpathentry kind="lib" path="C:/eclipse/lib/EssentialsGroupBridge.jar"/>
-	<classpathentry kind="lib" path="C:/eclipse/lib/EssentialsGroupManager.jar"/>
-	<classpathentry kind="lib" path="C:/eclipse/lib/bpermissions.jar"/>
-	<classpathentry kind="lib" path="C:/eclipse/lib/bukkit-1.2.5-R1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Kodning/Lib/bukkit-1.2.5-R2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Kodning/Lib/bPermissions.jar"/>
+	<classpathentry kind="lib" path="C:/Kodning/Lib/EssentialsGroupBridge.jar"/>
+	<classpathentry kind="lib" path="C:/Kodning/Lib/EssentialsGroupManager.jar"/>
+	<classpathentry kind="lib" path="C:/Kodning/Lib/PermissionsEx.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

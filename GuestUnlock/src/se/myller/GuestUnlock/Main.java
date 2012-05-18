@@ -46,7 +46,6 @@ import se.myller.GuestUnlock.Permission.PermbPermissions;
 
 public class Main extends JavaPlugin {
 	
-	
 		// Our variables:
 		public static Main plugin;
 		// Log
