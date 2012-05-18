@@ -67,6 +67,9 @@ public class Main extends JavaPlugin {
     	public CMDguestunlock cgu = new CMDguestunlock(this);
     	public CMDgupassword cgp = new CMDgupassword(this);
     	public CMDgutest cgt = new CMDgutest(this);
+    	
+    	
+    	public boolean passwordCheck = false;
 
 	
 	/*
@@ -83,6 +86,9 @@ public class Main extends JavaPlugin {
 		// Get the config
 		config = getConfig();
 		
+		//Check The Password
+		checkPassword();
+		
 		// Get the plugin.yml
 		PluginDescriptionFile pdfFile = this.getDescription();
 		
@@ -90,8 +96,20 @@ public class Main extends JavaPlugin {
 		log.info("[GuestUnlock] ==================================");
 		log.info("[GuestUnlock] =====   Loading");
 		log.info("[GuestUnlock] =====   Checking password");
-		log.info("[GuestUnlock] =====   PWD: " + config.getString("Admin.Password"));
-		log.info("[GuestUnlock] =====   Password OK");
+		if (passwordCheck == false) {
+			log.warning("[GuestUnlock] =====   Password is NOT OK!");
+			log.warning("[GuestUnlock] =====   Password is NOT OK!");
+			log.warning("[GuestUnlock] =====   Password is NOT OK!");
+			log.warning("[GuestUnlock] =====   Password is NOT OK!");
+			log.warning("[GuestUnlock] =====   Password is NOT OK!");
+			log.warning("[GuestUnlock] =====   Password is NOT OK!");
+			log.severe("-------------------------------------------------");
+			log.warning("[GuestUnlock] =====   Password MUST be a STRING!");
+			log.warning("[GuestUnlock] =====   Password set to default value: 'GuestUnlock'");
+			log.severe("-------------------------------------------------");
+		} else {
+			log.info("[GuestUnlock] =====   Password OK");
+		}
 		log.info("[GuestUnlock] =====   Lets see if you want auto-group moving");
 		
 		// Register our events
@@ -161,6 +179,18 @@ public class Main extends JavaPlugin {
 		log.info("[" + pdfFile.getName() + "] stopped running task!");
 		log.info("[" + pdfFile.getName() + "] version " + pdfFile.getVersion() + " by Myller is now Disabled!");
 		
+	}
+	public void checkPassword() {
+		config.getString("Admin.Password").toString();
+		if (config.isString("Admin.Password")) {
+			passwordCheck = true;
+			return;
+		} else {
+			config.set("Admin.Password", "GuestUnlock");
+			this.saveConfig();
+			passwordCheck = false;
+			return;
+		}
 	}
 	/*
 	 * 
