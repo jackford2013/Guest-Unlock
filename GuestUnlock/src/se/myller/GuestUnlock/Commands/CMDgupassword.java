@@ -35,6 +35,7 @@ public class CMDgupassword implements Command {
 	public void onCommandHelp(Player p) {
 		p.sendMessage(ChatColor.BLUE + "Usage: /gupassword <new password>");
 		p.sendMessage(ChatColor.BLUE + "Example: '/gupassword hello' this would set the password to: hello");
+		p.sendMessage(ChatColor.RED + "Aliases: /gadmin");
 		return;
 	}
 		

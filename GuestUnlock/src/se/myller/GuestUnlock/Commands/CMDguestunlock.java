@@ -78,6 +78,7 @@ public class CMDguestunlock implements Command {
 	public void onCommandHelp(Player p) {
 		p.sendMessage(ChatColor.BLUE + "Usage: /guestunlock <password>");
 		p.sendMessage(ChatColor.BLUE + "Example: '/guestunlock hello' this would send the password: hello, to the moderators.");
+		p.sendMessage(ChatColor.RED + "Aliases: /gu, /gunlock");
 		return;
 	}
 	
