@@ -7,17 +7,20 @@ commands:
   gutest:
     description: Test, aka ping-command
     usage: /<command>
-    permission-message: You dont have sufficent permissions!
+    permission-message: You dont have sufficent permissions! You are missing <permission>
+    permission: GuestUnlock.admin
   guestunlock:
     description: Sends password to admins
     usage: /<command> [Password]
     aliases: [gunlock, gu]
-    permission-message: You dont have sufficent permissions!
+    permission-message: You dont have sufficent permissions! You are missing <permission>
+    permission: GuestUnlock.guest
   gupassword:
     description: Changes the correct password
     usage: /<command> [New Password]
     aliases: [gadmin, gpassword]
-    permission-message: You dont have sufficent permissions!
+    permission-message: You dont have sufficent permissions! You are missing <permission>
+    permission: GuestUnlock.admin
 
 permissions:
   GuestUnlock.guest:
