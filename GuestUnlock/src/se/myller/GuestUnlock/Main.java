@@ -70,7 +70,7 @@ public class Main extends JavaPlugin {
     	public boolean hasNewVersion = false;
     	private boolean isDebugEnabled;
     	public boolean isNewConfigAvailable = false;
-    	private int newestConfigVersion = 5;
+    	private int newestConfigVersion = 4;
 	
     	public Main() {
     		guestUnlock = new CMDguestunlock(this);
