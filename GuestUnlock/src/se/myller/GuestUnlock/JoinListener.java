@@ -28,12 +28,12 @@ public class JoinListener implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		if (plugin.getConfig().getBoolean("Guest.Join.Enable") == true) {
+		if (plugin.getConfig().getBoolean("Guest.Join.Enable")) {
 			if (player.hasPermission("GuestUnlock.guest") && !player.hasPermission("GuestUnlock.moderator")) {
 					player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + plugin.getConfig().getString("Guest.Join.Message"));	
 			} 
 		}
-		if (player.hasPermission("GuestUnlock.moderator") && (plugin.newVersion == true)) {
+		if (player.hasPermission("GuestUnlock.moderator") && (plugin.newVersion)) {
 			player.sendMessage(ChatColor.YELLOW + "New version available for GuestUnlock: " + plugin.uc.newestVersion);
 			player.sendMessage(ChatColor.YELLOW + "Please check http://dev.bukkit.org/server-mods/GuestUnlock");
 		}

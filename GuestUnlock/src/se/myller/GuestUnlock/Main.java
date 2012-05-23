@@ -137,25 +137,25 @@ public class Main extends JavaPlugin {
 		getCommand("gutest").setExecutor(commandEx);
 		
 		// Check config for permissions support
-		if (config.getBoolean("Permissions.PermissionsEx.Enable") == true || config.getBoolean("Permissions.GroupManager.Enable") == true || config.getBoolean("Permissions.bPermissions.Enable") == true) {
+		if (config.getBoolean("Permissions.PermissionsEx.Enable") || config.getBoolean("Permissions.GroupManager.Enable") || config.getBoolean("Permissions.bPermissions.Enable")) {
 			log("=====   You wanted auto-group moving support!", true, Level.INFO);
 			
 			// Implement PEX
-			if (config.getBoolean("Permissions.PermissionsEx.Enable") == true ) {
+			if (config.getBoolean("Permissions.PermissionsEx.Enable")) {
 				log("=====   Ill try to find PermissionsEx [PEX]!", true, Level.INFO);
 				ppe = new PermPermissionsEx(this);
 				ppe.getPex();
 			}
 			
 			// Implement GM
-			else if (config.getBoolean("Permissions.GroupManager.Enable") == true ) {
+			else if (config.getBoolean("Permissions.GroupManager.Enable")) {
 				log("=====   Ill try to find GroupManager [GM]!", true, Level.INFO);
 				pgm = new PermGroupManager(this);
 				pgm.getGM();
 				}
 			
 			// Implement bP
-			else if (config.getBoolean("Permissions.bPermissions.Enable") == true) {
+			else if (config.getBoolean("Permissions.bPermissions.Enable")) {
 				log("=====   Ill try to find bPermissions [bP]!", true, Level.INFO);
 				pbp = new PermbPermissions(this);
 				pbp.getBP();
@@ -202,11 +202,11 @@ public class Main extends JavaPlugin {
 	}
 	public void log(String message, boolean debug, Level level) {
 		String prefix = "[GuestUnlock] ";
-		if (debug == false) {
+		if (!debug) {
 			logger.log(level, prefix + message);
 		} else if (debug && configDebug) {
 			logger.log(level, prefix + message);
-		} else if (configDebug == false && debug) {
+		} else if (!configDebug && debug) {
 			return;
 		} else {
 			logger.log(level, prefix + message);

@@ -40,15 +40,15 @@ public class CMDguestunlock implements Command {
 		} else {
 			s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BLUE + "There is multiple moderators online, they will check you password shortly.");
 		}
-		if (plugin.config.getBoolean("Permissions.PermissionsEx.Enable") == true ) {
+		if (plugin.config.getBoolean("Permissions.PermissionsEx.Enable")) {
 			Player player = (Player)s; 
 			plugin.ppe.setGroupPEX(player);
 		}
-		if (plugin.config.getBoolean("Permissions.GroupManager.Enable") == true) {
+		else if (plugin.config.getBoolean("Permissions.GroupManager.Enable")) {
 			Player player = (Player)s; 
 			plugin.pgm.setGroupGM(player);
 		}
-		if (plugin.config.getBoolean("Permissions.bPermissions.Enable") == true) {
+		else if (plugin.config.getBoolean("Permissions.bPermissions.Enable")) {
 			Player player = (Player)s; 
 			plugin.pbp.setGroupBP(player);
 		}
