@@ -28,12 +28,12 @@ public class CMDgupassword implements Command {
 	}
 	@Override
 	public void onCommandFail(Player p) {
-		p.sendMessage(ChatColor.RED + "Invalid arguments/syntax, try '/<command> help'.");
+		p.sendMessage(ChatColor.RED + "Invalid arguments/syntax, try '/gupassword help'.");
 		return;
 	}
 	@Override
 	public void onCommandHelp(Player p) {
-		p.sendMessage(ChatColor.BLUE + "Usage: /<command> <new password>");
+		p.sendMessage(ChatColor.BLUE + "Usage: /gupassword <new password>");
 		p.sendMessage(ChatColor.BLUE + "Example: '/gupassword hello' this would set the password to: hello");
 		return;
 	}

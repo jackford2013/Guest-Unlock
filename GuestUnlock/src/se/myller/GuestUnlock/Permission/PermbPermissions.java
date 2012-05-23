@@ -23,7 +23,7 @@ public class PermbPermissions {
 	 * 
 	 */
 	public void getBP() {
-			Plugin BP = plugin.pm.getPlugin("bPermissions");
+			Plugin BP = plugin.pluginManager.getPlugin("bPermissions");
 			if (BP != null) {
 				if (BP.getClass().getName().equals("de.bananaco.bpermissions.imp.Permissions")) {
 					plugin.log("=====   Found bPermissions, I will try to enable a hook!", false, Level.INFO);

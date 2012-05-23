@@ -23,12 +23,12 @@ public class PermGroupManager {
 	 * 
 	 */
 	public void getGM() {
-		Plugin GM = plugin.pm.getPlugin("GroupManager");
+		Plugin GM = plugin.pluginManager.getPlugin("GroupManager");
 		
 		if (GM != null) {
 			if (GM.getClass().getName().equals("org.anjocaido.groupmanager.GroupManager")) {
 				plugin.log("=====   Found GroupManager, I will try to enable a hook!", false, Level.INFO);
-				plugin.groupManager = (GroupManager)GM;
+				plugin.groupMan = (GroupManager)GM;
 			} else {
 				plugin.log("-----------------------------------------", true, Level.INFO);
 				plugin.log("=====   You wanted GroupManager support, could not find it.", false, Level.INFO);
@@ -47,7 +47,7 @@ public class PermGroupManager {
 		}
 	}
 	public boolean setGroupGM(final Player base) {
-		final OverloadedWorldHolder handler = plugin.groupManager.getWorldsHolder().getWorldData(base);
+		final OverloadedWorldHolder handler = plugin.groupMan.getWorldsHolder().getWorldData(base);
 		if (handler == null) {
 			return false;
 		}

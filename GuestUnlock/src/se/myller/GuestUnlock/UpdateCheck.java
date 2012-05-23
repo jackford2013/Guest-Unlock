@@ -32,7 +32,7 @@ public class UpdateCheck implements Runnable {
             	if (!plugin.getDescription().getVersion().equals(newestVersion)) {
                     plugin.log("Found a different version available: " + newestVersion, false, Level.WARNING);
                     plugin.log("Check http://dev.bukkit.org/server-mods/GuestUnlock/", false, Level.WARNING);
-                    plugin.newVersion = true;
+                    plugin.hasNewVersion = true;
             	} else {
             		plugin.log("Did not found a new version", true, Level.INFO);
             	}

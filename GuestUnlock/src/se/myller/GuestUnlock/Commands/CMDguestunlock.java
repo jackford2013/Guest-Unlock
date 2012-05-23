@@ -38,19 +38,19 @@ public class CMDguestunlock implements Command {
 		} else if (foundModerators == 1) {
 			s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BLUE + "There is one moderator online, he will check your password shortly.");
 		} else {
-			s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BLUE + "There is multiple moderators online, they will check you password shortly.");
+			s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.BLUE + "There are more than 2 moderators online, they will check you password shortly.");
 		}
 		if (plugin.config.getBoolean("Permissions.PermissionsEx.Enable")) {
 			Player player = (Player)s; 
-			plugin.ppe.setGroupPEX(player);
+			plugin.permissionsEx.setGroupPEX(player);
 		}
 		else if (plugin.config.getBoolean("Permissions.GroupManager.Enable")) {
 			Player player = (Player)s; 
-			plugin.pgm.setGroupGM(player);
+			plugin.groupManager.setGroupGM(player);
 		}
 		else if (plugin.config.getBoolean("Permissions.bPermissions.Enable")) {
 			Player player = (Player)s; 
-			plugin.pbp.setGroupBP(player);
+			plugin.bPermissions.setGroupBP(player);
 		}
 		return true;
 	}
@@ -71,12 +71,12 @@ public class CMDguestunlock implements Command {
 
 	@Override
 	public void onCommandFail(Player p) {
-		p.sendMessage(ChatColor.RED + "Invalid arguments/syntax, try '/<command> help'.");
+		p.sendMessage(ChatColor.RED + "Invalid arguments/syntax, try '/guestunlock help'.");
 		return;
 	}
 	@Override
 	public void onCommandHelp(Player p) {
-		p.sendMessage(ChatColor.BLUE + "Usage: /<command> <password>");
+		p.sendMessage(ChatColor.BLUE + "Usage: /guestunlock <password>");
 		p.sendMessage(ChatColor.BLUE + "Example: '/guestunlock hello' this would send the password: hello, to the moderators.");
 		return;
 	}

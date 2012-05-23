@@ -49,33 +49,33 @@ public class Main extends JavaPlugin {
 	
 		// Our variables:
 		public static Main plugin;
-		// Log
 		public Logger logger;
-		// Config
 		public FileConfiguration config;
-		// Repeater
-		public static int tid = 0;
-		public static long interval;
-		// PluginManager
-		public PluginManager pm;
-		// Different permissionplugins
-		public GroupManager groupManager;
-		public PermGroupManager pgm;
-		public PermbPermissions pbp;
-		public PermPermissionsEx ppe;
-    
-		// Commands
-    	public CMDguestunlock cgu = new CMDguestunlock(this);
-    	public CMDgupassword cgp = new CMDgupassword(this);
-    	public CMDgutest cgt = new CMDgutest(this);
-    	
-    	// VersionCheck
-    	public UpdateCheck uc = new UpdateCheck(this);
+
+		public static int threadID = 0;
+		public static long messageInterval;
+
+		
+		public PluginManager pluginManager;
+		public GroupManager groupMan;
+		public PermGroupManager groupManager;
+		public PermbPermissions bPermissions;
+		public PermPermissionsEx permissionsEx;
+    	public CMDguestunlock guestUnlock;
+    	public CMDgupassword guPassword;
+    	public CMDgutest guTest;
+    	public UpdateCheck updateCheck;
     	
     	public boolean passwordCheck = false;
-    	public boolean newVersion = false;
-    	private boolean configDebug;
+    	public boolean hasNewVersion = false;
+    	private boolean isDebugEnabled;
 	
+    	public Main() {
+    		guestUnlock = new CMDguestunlock(this);
+    		guPassword = new CMDgupassword(this);
+    		guTest = new CMDgutest(this);
+    		updateCheck = new UpdateCheck(this);
+    	}
 	/*
 	 * 
 	 * On plugin enable
@@ -91,10 +91,10 @@ public class Main extends JavaPlugin {
 		config = getConfig();
 		
 		// Debug
-		configDebug = config.getBoolean("Admin.Debug");
+		isDebugEnabled = config.getBoolean("Admin.Debug");
 		
 		//Check The Password
-		if (configDebug) {
+		if (isDebugEnabled) {
 			checkPassword();
 		}
 		// Get the plugin.yml
@@ -121,8 +121,8 @@ public class Main extends JavaPlugin {
 		log("=====   Lets see if you want auto-group moving", true, Level.INFO);
 		
 		// Register our events
-		pm = getServer().getPluginManager();
-		pm.registerEvents(new JoinListener(this), this);
+		pluginManager = getServer().getPluginManager();
+		pluginManager.registerEvents(new JoinListener(this), this);
 		
 		// Make our config + directory
 		MakeDefaultConfig();
@@ -143,29 +143,29 @@ public class Main extends JavaPlugin {
 			// Implement PEX
 			if (config.getBoolean("Permissions.PermissionsEx.Enable")) {
 				log("=====   Ill try to find PermissionsEx [PEX]!", true, Level.INFO);
-				ppe = new PermPermissionsEx(this);
-				ppe.getPex();
+				permissionsEx = new PermPermissionsEx(this);
+				permissionsEx.getPex();
 			}
 			
 			// Implement GM
 			else if (config.getBoolean("Permissions.GroupManager.Enable")) {
 				log("=====   Ill try to find GroupManager [GM]!", true, Level.INFO);
-				pgm = new PermGroupManager(this);
-				pgm.getGM();
+				groupManager = new PermGroupManager(this);
+				groupManager.getGM();
 				}
 			
 			// Implement bP
 			else if (config.getBoolean("Permissions.bPermissions.Enable")) {
 				log("=====   Ill try to find bPermissions [bP]!", true, Level.INFO);
-				pbp = new PermbPermissions(this);
-				pbp.getBP();
+				bPermissions = new PermbPermissions(this);
+				bPermissions.getBP();
 				}
 		} else {
 			log("=====   You did not want auto-group moving enabled!", true, Level.INFO);
 		}
 		log("version " + pdfFile.getVersion() + " by Myller is now Enabled!", false, Level.INFO);
 		log("==================================", false, Level.INFO);
-		uc.run();
+		updateCheck.run();
 	}
 	/*
 	 * 
@@ -181,11 +181,11 @@ public class Main extends JavaPlugin {
 		PluginDescriptionFile pdfFile = this.getDescription();
 		
 		// Stop the running task
-		Bukkit.getServer().getScheduler().cancelTask(tid);
+		Bukkit.getServer().getScheduler().cancelTask(threadID);
 		
 		// Msg:s to the log
-		log("[" + pdfFile.getName() + "] stopped running task!", true, Level.INFO);
-		log("[" + pdfFile.getName() + "] version " + pdfFile.getVersion() + " by Myller is now Disabled!", false, Level.INFO);
+		log("stopped running task!", true, Level.INFO);
+		log("version " + pdfFile.getVersion() + " by Myller is now Disabled!", false, Level.INFO);
 		
 	}
 	public void checkPassword() {
@@ -204,9 +204,9 @@ public class Main extends JavaPlugin {
 		String prefix = "[GuestUnlock] ";
 		if (!debug) {
 			logger.log(level, prefix + message);
-		} else if (debug && configDebug) {
+		} else if (debug && isDebugEnabled) {
 			logger.log(level, prefix + message);
-		} else if (!configDebug && debug) {
+		} else if (!isDebugEnabled && debug) {
 			return;
 		} else {
 			logger.log(level, prefix + message);
@@ -239,8 +239,8 @@ public class Main extends JavaPlugin {
 	 * 
 	 */
 	public void RepeatMessages() {
-		interval = config.getInt("Guest.RepeatingMessage.Interval");
-		tid = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+		messageInterval = config.getInt("Guest.RepeatingMessage.Interval") * 20;
+		threadID = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -249,7 +249,7 @@ public class Main extends JavaPlugin {
 					e.printStackTrace();
 				}
 			}
-		}, 0, interval * 20);
+		}, 0, messageInterval);
 	}
 	/*
 	 * 

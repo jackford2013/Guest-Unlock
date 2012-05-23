@@ -24,7 +24,7 @@ public class PermPermissionsEx {
 	 * 
 	 */
 	public void getPex() {
-		Plugin pex = plugin.pm.getPlugin("PermissionsEx");
+		Plugin pex = plugin.pluginManager.getPlugin("PermissionsEx");
 		if (pex != null) {
 			if (pex.getClass().getName().equals("ru.tehkode.permissions")) {
 				plugin.log(" =====   Found PermissionEx!", true, Level.INFO);
