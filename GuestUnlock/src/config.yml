@@ -2,8 +2,8 @@
 ## The Main Config-File for GuestUnlock!       #
 ## Coded by Myller for  http://tehwarriors.net #
 ################################################
-
-
+Configuration-Version: 4
+#
 ################################################
 ##########     Main Configuration     ##########
 ################################################
@@ -63,6 +63,7 @@ Permissions:
 # ADMIN
     # Password: string, the correct password.
     # SendIncorrectMessageToMods: boolean, send a message to moderators when a player sends the wrong password?
+    # Debug: boolean, print extra messages to the log?
 # PERMISSIONS:    
     # SendMessageOnGroupChange: boolean, Send a message to moderators online when a player sends the correct password and is moved to the build group
     # PERMISSIONEX/GROUPMANAGER/BPERMISSIONS
