@@ -69,6 +69,8 @@ public class Main extends JavaPlugin {
     	public boolean passwordCheck = false;
     	public boolean hasNewVersion = false;
     	private boolean isDebugEnabled;
+    	public boolean isNewConfigAvailable = false;
+    	private int newestConfigVersion = 5;
 	
     	public Main() {
     		guestUnlock = new CMDguestunlock(this);
@@ -165,7 +167,12 @@ public class Main extends JavaPlugin {
 		}
 		log("version " + pdfFile.getVersion() + " by Myller is now Enabled!", false, Level.INFO);
 		log("==================================", false, Level.INFO);
+		
+		// Check for updates
 		updateCheck.run();
+		
+		// Check config-version
+		checkConfigVersion();
 	}
 	/*
 	 * 
@@ -266,6 +273,13 @@ public class Main extends JavaPlugin {
 						player.sendMessage(ChatColor.GREEN + config.getString("Guest.RepeatMessage.RepeatMessage"));
 					}
 			}
+		}
+	}
+	public void checkConfigVersion() {
+		int currentConfigVersion = config.getInt("Configuration-Version");
+		if (currentConfigVersion < newestConfigVersion) {
+			log("There is a new config-version available, you are currently using v" + currentConfigVersion + ", the latest is v" + newestConfigVersion, false, Level.INFO);
+			isNewConfigAvailable = true;
 		}
 	}
 }

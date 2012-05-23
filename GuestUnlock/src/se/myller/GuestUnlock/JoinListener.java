@@ -37,5 +37,9 @@ public class JoinListener implements Listener {
 			player.sendMessage(ChatColor.YELLOW + "New version available for GuestUnlock: " + plugin.updateCheck.newestVersion);
 			player.sendMessage(ChatColor.YELLOW + "Please check http://dev.bukkit.org/server-mods/GuestUnlock");
 		}
+		if (player.hasPermission("GuestUnlock.admin") && (plugin.isNewConfigAvailable)) {
+			player.sendMessage(ChatColor.YELLOW + "New config-version is available for GuestUnlock!");
+			player.sendMessage(ChatColor.YELLOW + "Please regenerate your config.yml");
+		}
 	}
 }
