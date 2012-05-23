@@ -19,6 +19,7 @@ package se.myller.GuestUnlock;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.anjocaido.groupmanager.GroupManager;
@@ -49,7 +50,7 @@ public class Main extends JavaPlugin {
 		// Our variables:
 		public static Main plugin;
 		// Log
-		public Logger log;
+		public Logger logger;
 		// Config
 		public FileConfiguration config;
 		// Repeater
@@ -68,9 +69,12 @@ public class Main extends JavaPlugin {
     	public CMDgupassword cgp = new CMDgupassword(this);
     	public CMDgutest cgt = new CMDgutest(this);
     	
+    	// VersionCheck
+    	public UpdateCheck uc = new UpdateCheck(this);
     	
     	public boolean passwordCheck = false;
-
+    	public boolean newVersion = false;
+    	private boolean configDebug;
 	
 	/*
 	 * 
@@ -81,36 +85,40 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 
 		// Get the logger
-		log = Logger.getLogger("Minecraft");
+		logger = Logger.getLogger("Minecraft.GuestUnlock");
 		
 		// Get the config
 		config = getConfig();
 		
-		//Check The Password
-		checkPassword();
+		// Debug
+		configDebug = config.getBoolean("Admin.Debug");
 		
+		//Check The Password
+		if (configDebug) {
+			checkPassword();
+		}
 		// Get the plugin.yml
 		PluginDescriptionFile pdfFile = this.getDescription();
 		
 		// Msg to the console
-		log.info("[GuestUnlock] ==================================");
-		log.info("[GuestUnlock] =====   Loading");
-		log.info("[GuestUnlock] =====   Checking password");
+		log("==================================", false, Level.INFO);
+		log("=====   Loading", true, Level.INFO);
+		log("=====   Checking password", true, Level.INFO);
 		if (passwordCheck == false) {
-			log.warning("[GuestUnlock] =====   Password is NOT OK!");
-			log.warning("[GuestUnlock] =====   Password is NOT OK!");
-			log.warning("[GuestUnlock] =====   Password is NOT OK!");
-			log.warning("[GuestUnlock] =====   Password is NOT OK!");
-			log.warning("[GuestUnlock] =====   Password is NOT OK!");
-			log.warning("[GuestUnlock] =====   Password is NOT OK!");
-			log.severe("-------------------------------------------------");
-			log.warning("[GuestUnlock] =====   Password MUST be a STRING!");
-			log.warning("[GuestUnlock] =====   Password set to default value: 'GuestUnlock'");
-			log.severe("-------------------------------------------------");
+			log("=====   Password is NOT OK!", true, Level.WARNING);
+			log("=====   Password is NOT OK!", true, Level.WARNING);
+			log("=====   Password is NOT OK!", true, Level.WARNING);
+			log("=====   Password is NOT OK!", true, Level.WARNING);
+			log("=====   Password is NOT OK!", true, Level.WARNING);
+			log("=====   Password is NOT OK!", true, Level.WARNING);
+			log("-------------------------------------------------", true, Level.INFO);
+			log("=====   Password MUST be a STRING!", true, Level.WARNING);
+			log("=====   Password set to default value: 'GuestUnlock'", true, Level.WARNING);
+			log("-------------------------------------------------", true, Level.INFO);
 		} else {
-			log.info("[GuestUnlock] =====   Password OK");
+			log("=====   Password OK", true, Level.INFO);
 		}
-		log.info("[GuestUnlock] =====   Lets see if you want auto-group moving");
+		log("=====   Lets see if you want auto-group moving", true, Level.INFO);
 		
 		// Register our events
 		pm = getServer().getPluginManager();
@@ -130,34 +138,34 @@ public class Main extends JavaPlugin {
 		
 		// Check config for permissions support
 		if (config.getBoolean("Permissions.PermissionsEx.Enable") == true || config.getBoolean("Permissions.GroupManager.Enable") == true || config.getBoolean("Permissions.bPermissions.Enable") == true) {
-			log.info("[GuestUnlock] =====   You wanted auto-group moving support!");
+			log("=====   You wanted auto-group moving support!", true, Level.INFO);
 			
 			// Implement PEX
 			if (config.getBoolean("Permissions.PermissionsEx.Enable") == true ) {
-				log.info("[GuestUnlock] =====   Ill try to find PermissionsEx [PEX]!");
+				log("=====   Ill try to find PermissionsEx [PEX]!", true, Level.INFO);
 				ppe = new PermPermissionsEx(this);
 				ppe.getPex();
 			}
 			
 			// Implement GM
 			else if (config.getBoolean("Permissions.GroupManager.Enable") == true ) {
-				log.info("[GuestUnlock] =====   Ill try to find GroupManager [GM]!");
+				log("=====   Ill try to find GroupManager [GM]!", true, Level.INFO);
 				pgm = new PermGroupManager(this);
 				pgm.getGM();
 				}
 			
 			// Implement bP
 			else if (config.getBoolean("Permissions.bPermissions.Enable") == true) {
-				log.info("[GuestUnlock] =====   Ill try to find bPermissions [bP]!");
+				log("=====   Ill try to find bPermissions [bP]!", true, Level.INFO);
 				pbp = new PermbPermissions(this);
 				pbp.getBP();
 				}
 		} else {
-			log.info("[GuestUnlock] =====   You didnot want auto-group moving enabled!");
+			log("=====   You did not want auto-group moving enabled!", true, Level.INFO);
 		}
-		
-		log.info("[GuestUnlock] ==================================");
-		log.info("[GuestUnlock] version " + pdfFile.getVersion() + " by Myller is now Enabled!");
+		log("version " + pdfFile.getVersion() + " by Myller is now Enabled!", false, Level.INFO);
+		log("==================================", false, Level.INFO);
+		uc.run();
 	}
 	/*
 	 * 
@@ -167,7 +175,7 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		// Get the logger
-		log = Logger.getLogger("Minecraft");
+		logger = Logger.getLogger("Minecraft");
 		
 		// Get the plugin.yml
 		PluginDescriptionFile pdfFile = this.getDescription();
@@ -176,8 +184,8 @@ public class Main extends JavaPlugin {
 		Bukkit.getServer().getScheduler().cancelTask(tid);
 		
 		// Msg:s to the log
-		log.info("[" + pdfFile.getName() + "] stopped running task!");
-		log.info("[" + pdfFile.getName() + "] version " + pdfFile.getVersion() + " by Myller is now Disabled!");
+		log("[" + pdfFile.getName() + "] stopped running task!", true, Level.INFO);
+		log("[" + pdfFile.getName() + "] version " + pdfFile.getVersion() + " by Myller is now Disabled!", false, Level.INFO);
 		
 	}
 	public void checkPassword() {
@@ -192,6 +200,18 @@ public class Main extends JavaPlugin {
 			return;
 		}
 	}
+	public void log(String message, boolean debug, Level level) {
+		String prefix = "[GuestUnlock] ";
+		if (debug == false) {
+			logger.log(level, prefix + message);
+		} else if (debug && configDebug) {
+			logger.log(level, prefix + message);
+		} else if (configDebug == false && debug) {
+			return;
+		} else {
+			logger.log(level, prefix + message);
+		}
+	}
 	/*
 	 * 
 	 * Make our config + directory
@@ -203,14 +223,13 @@ public class Main extends JavaPlugin {
 			if(!configFile.exists()) {
 				new File("plugins/GuestUnlock").mkdir();
 				this.saveDefaultConfig();
-				log = Logger.getLogger("Minecraft");
-				log.info("[GuestUnlock] =====   Configuration file and directory created!");
+				log("=====   Configuration file and directory created!", false, Level.INFO);
 			} else {
-				log.info("[GuestUnlock] =====   Configuration file loaded!");
+				log("=====   Configuration file loaded!", true, Level.INFO);
 			}
 		} catch(Exception e) {	
-			log.severe("[GuestUnlock] =====   Configuration file failed to load!");
-			log.severe("[GuestUnlock] =====   Disabling Plugin.");
+			log("=====   Configuration file failed to load!", false, Level.SEVERE);
+			log("=====   Disabling Plugin.", false, Level.SEVERE);
 			getServer().getPluginManager().disablePlugin(this);
 		}
 	}
@@ -242,9 +261,9 @@ public class Main extends JavaPlugin {
 		for (Player player: players) {
 			if (player.hasPermission("GuestUnlock.guest") && !player.hasPermission("GuestUnlock.moderator")) {
 					if (config.getBoolean("Guest.RepeatingMessage.UseJoinMessage") == true) { 
-						player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + config.getString("Guest.Join.Message"));
+						player.sendMessage(ChatColor.GREEN + config.getString("Guest.Join.Message"));
 					} else {
-						player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + config.getString("Guest.RepeatMessage.RepeatMessage"));
+						player.sendMessage(ChatColor.GREEN + config.getString("Guest.RepeatMessage.RepeatMessage"));
 					}
 			}
 		}

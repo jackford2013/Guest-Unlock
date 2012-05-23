@@ -1,5 +1,7 @@
 package se.myller.GuestUnlock.Commands;
 
+import java.util.logging.Level;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -22,7 +24,7 @@ public class CMDguestunlock implements Command {
 	 */
 	public boolean cmdSend(CommandSender s, String pwd) {
 		s.sendMessage(ChatColor.GREEN + plugin.config.getString("Guest.Responds.Correct"));
-		plugin.log.info("[GuestUnlock] " + s.getName() + " has sent the correct password!");
+		plugin.log(s.getName() + " has sent the correct password!", false, Level.INFO);
 		Player[] players = plugin.getServer().getOnlinePlayers();
 		int foundModerators = 0;
 		for (Player p: players) {
@@ -55,7 +57,7 @@ public class CMDguestunlock implements Command {
 	public boolean cmdFail(CommandSender s, String pwd) {
 		s.sendMessage(ChatColor.RED + plugin.config.getString("Guest.Responds.Incorrect"));
 		if(plugin.config.getBoolean("Admin.SendIncorrectMessageToMods") == true) {
-			plugin.log.warning("[GuestUnlock] The player " + s.getName() + " tried to send this password: " + pwd);
+			plugin.log("The player " + s.getName() + " tried to send this password: " + pwd, false, Level.WARNING);
 			Player[] players = plugin.getServer().getOnlinePlayers();
 			for (Player player: players) {
 				if(player.hasPermission("GuestUnlock.moderator")) {

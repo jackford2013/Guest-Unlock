@@ -1,5 +1,7 @@
 package se.myller.GuestUnlock.Permission;
 
+import java.util.logging.Level;
+
 import org.anjocaido.groupmanager.GroupManager;
 import org.anjocaido.groupmanager.dataholder.OverloadedWorldHolder;
 import org.bukkit.ChatColor;
@@ -25,22 +27,22 @@ public class PermGroupManager {
 		
 		if (GM != null) {
 			if (GM.getClass().getName().equals("org.anjocaido.groupmanager.GroupManager")) {
-				plugin.log.info("[GuestUnlock] =====   Found GroupManager!");
+				plugin.log("=====   Found GroupManager, I will try to enable a hook!", false, Level.INFO);
 				plugin.groupManager = (GroupManager)GM;
 			} else {
-				plugin.log.severe("[GuestUnlock] -----------------------------------------");
-				plugin.log.severe("[GuestUnlock] =====   You wanted GroupManager support!");
-				plugin.log.severe("[GuestUnlock] =====   I cant find it!");
-				plugin.log.severe("[GuestUnlock] =====   Could not find GroupManager.");
-				plugin.log.severe("[GuestUnlock] -----------------------------------------");
+				plugin.log("-----------------------------------------", true, Level.INFO);
+				plugin.log("=====   You wanted GroupManager support, could not find it.", false, Level.INFO);
+				plugin.log("=====   I cant find it!", true, Level.INFO);
+				plugin.log("=====   Could not find GroupManager.", true, Level.INFO);
+				plugin.log("-----------------------------------------", true, Level.INFO);
 				return;
 				}
 		} else {
-			plugin.log.severe("[GuestUnlock] -----------------------------------------");
-			plugin.log.severe("[GuestUnlock] =====   You wanted GroupManager support!");
-			plugin.log.severe("[GuestUnlock] =====   I cant find it!");
-			plugin.log.severe("[GuestUnlock] =====   Could not find GroupManager.");
-			plugin.log.severe("[GuestUnlock] -----------------------------------------");
+			plugin.log("-----------------------------------------", true, Level.INFO);
+			plugin.log("=====   You wanted GroupManager support, could not find it.", false, Level.INFO);
+			plugin.log("=====   I cant find it!", true, Level.INFO);
+			plugin.log("=====   Could not find GroupManager.", true, Level.INFO);
+			plugin.log("-----------------------------------------", true, Level.INFO);
 			return;
 		}
 	}
@@ -51,7 +53,7 @@ public class PermGroupManager {
 		}
 		if (handler.getUser(base.getName()).getGroupName().equals("Permissions.GroupManager.Group.Default")) {
 			handler.getUser(base.getName()).setGroup(handler.getGroup(plugin.config.getString("Permissions.GroupManager.Group.Build")));
-			plugin.log.info("[GuestUnlock] Set " + base.getName() + ":s group to " + plugin.config.getString("Permissions.GroupManager.Group.Build"));
+			plugin.log("Set " + base.getName() + ":s group to " + plugin.config.getString("Permissions.GroupManager.Group.Build"), true, Level.INFO);
 			base.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "Your group is now " + plugin.config.getString("Permissions.GroupManager.Group.Build"));
 			handler.reloadGroups();
 			handler.reloadUsers();

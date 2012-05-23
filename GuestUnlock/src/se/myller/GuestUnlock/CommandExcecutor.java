@@ -1,5 +1,7 @@
 package se.myller.GuestUnlock;
 
+import java.util.logging.Level;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -81,7 +83,7 @@ public class CommandExcecutor implements CommandExecutor {
 			}
 		} else {
 			sender.sendMessage(ChatColor.RED + "[GuestUnlock] Error!");
-			plugin.log.info("[GuestUnlock] Error!");
+			plugin.log("Error in commandhandling!", false, Level.SEVERE);
 			return true;
 		}
 		return false;

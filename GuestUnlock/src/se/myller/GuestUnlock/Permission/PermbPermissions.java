@@ -1,5 +1,7 @@
 package se.myller.GuestUnlock.Permission;
 
+import java.util.logging.Level;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -24,28 +26,28 @@ public class PermbPermissions {
 			Plugin BP = plugin.pm.getPlugin("bPermissions");
 			if (BP != null) {
 				if (BP.getClass().getName().equals("de.bananaco.bpermissions.imp.Permissions")) {
-					plugin.log.info("[GuestUnlock] =====   Found bPermissions!");
+					plugin.log("=====   Found bPermissions, I will try to enable a hook!", false, Level.INFO);
 				} else {
-					plugin.log.severe("[GuestUnlock] -----------------------------------------");
-					plugin.log.severe("[GuestUnlock] =====   You wanted bPermissions support!");
-					plugin.log.severe("[GuestUnlock] =====   I cant find it!");
-					plugin.log.severe("[GuestUnlock] =====   Could not find bPermissions.");
-					plugin.log.severe("[GuestUnlock] -----------------------------------------");
+					plugin.log("-----------------------------------------", true, Level.INFO);
+					plugin.log("=====   You wanted bPermissions support, could not find it.", false, Level.INFO);
+					plugin.log("=====   I cant find it!", true, Level.INFO);
+					plugin.log("=====   Could not find bPermissions.", true, Level.INFO);
+					plugin.log("-----------------------------------------", true, Level.INFO);
 					return;
 					}
 			} else {
-				plugin.log.severe("[GuestUnlock] -----------------------------------------");
-				plugin.log.severe("[GuestUnlock] =====   You wanted bPermissions support!");
-				plugin.log.severe("[GuestUnlock] =====   I cant find it!");
-				plugin.log.severe("[GuestUnlock] =====   Could not find bPermissions.");
-				plugin.log.severe("[GuestUnlock] -----------------------------------------");
+				plugin.log(" -----------------------------------------", true, Level.INFO);
+				plugin.log(" =====   You wanted bPermissions support, could not find it.", false, Level.INFO);
+				plugin.log(" =====   I cant find it!", true, Level.INFO);
+				plugin.log(" =====   Could not find bPermissions.", true, Level.INFO);
+				plugin.log(" -----------------------------------------", true, Level.INFO);
 				return;
 			}
 	}
 	public void setGroupBP(Player p) {
 		if (ApiLayer.hasGroup(p.getWorld().getName(), CalculableType.USER, p.getName(), plugin.config.getString("Permissions.bPermissions.Group.Default"))) {
 			ApiLayer.setGroup(p.getWorld().getName(), CalculableType.USER, p.getName(), plugin.config.getString("Permissions.bPermissions.Group.Build"));
-			plugin.log.info("[GuestUnlock] Set " + p.getName() + ":s group to " + plugin.config.getString("Permissions.bPermissions.Group.Build"));
+			plugin.log("Set " + p.getName() + ":s group to " + plugin.config.getString("Permissions.bPermissions.Group.Build"), true, Level.INFO);
 			p.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "Your group is now " + plugin.config.getString("Permissions.bPermissions.Group.Build"));
 			if (plugin.config.getBoolean("Permissions.SendMessageOnGroupChange") == true ) {
 				Player[] players = plugin.getServer().getOnlinePlayers();

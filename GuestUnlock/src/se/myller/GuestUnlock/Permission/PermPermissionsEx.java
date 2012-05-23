@@ -1,5 +1,7 @@
 package se.myller.GuestUnlock.Permission;
 
+import java.util.logging.Level;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -25,21 +27,21 @@ public class PermPermissionsEx {
 		Plugin pex = plugin.pm.getPlugin("PermissionsEx");
 		if (pex != null) {
 			if (pex.getClass().getName().equals("ru.tehkode.permissions")) {
-				plugin.log.info("[GuestUnlock] =====   Found PermissionEx!");
+				plugin.log(" =====   Found PermissionEx!", true, Level.INFO);
 			} else {
-				plugin.log.severe("[GuestUnlock] -----------------------------------------");
-				plugin.log.severe("[GuestUnlock] =====   You wanted PermissionsEx support!");
-				plugin.log.severe("[GuestUnlock] =====   I cant find it!");
-				plugin.log.severe("[GuestUnlock] =====   Could not find PermissionsEx.");
-				plugin.log.severe("[GuestUnlock] -----------------------------------------");
+				plugin.log(" -----------------------------------------", true, Level.INFO);
+				plugin.log(" =====   You wanted PermissionsEx support, could not find it.", false, Level.INFO);
+				plugin.log(" =====   I cant find it!", true, Level.INFO);
+				plugin.log(" =====   Could not find PermissionsEx.", true, Level.INFO);
+				plugin.log(" -----------------------------------------", true, Level.INFO);
 				return;
 				}
 		} else {
-			plugin.log.severe("[GuestUnlock] -----------------------------------------");
-			plugin.log.severe("[GuestUnlock] =====   You wanted PermissionsEx support!");
-			plugin.log.severe("[GuestUnlock] =====   I cant find it!");
-			plugin.log.severe("[GuestUnlock] =====   Could not find PermissionsEx.");
-			plugin.log.severe("[GuestUnlock] -----------------------------------------");
+			plugin.log(" -----------------------------------------", true, Level.INFO);
+			plugin.log(" =====   You wanted PermissionsEx support, could not find it.", false, Level.INFO);
+			plugin.log(" =====   I cant find it!", true, Level.INFO);
+			plugin.log(" =====   Could not find PermissionsEx.", true, Level.INFO);
+			plugin.log(" -----------------------------------------", true, Level.INFO);
 			return;
 		}
 	}
@@ -50,7 +52,7 @@ public class PermPermissionsEx {
 		for (PermissionGroup pg: userGroups) {
 			if (pg.toString().equals((plugin.config.getString("Permissions.PermissionsEx.Group.Default")))) {
 				user.setGroups(new String[] { plugin.config.getString("Permissions.PermissionsEx.Group") });
-				plugin.log.info("[GuestUnlock] Set " + name + ":s group to " + plugin.config.getString("Permissions.PermissionsEx.Group"));
+				plugin.log("Set " + name + ":s group to " + plugin.config.getString("Permissions.PermissionsEx.Group"), true, Level.INFO);
 				player.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.GREEN + "Your group is now " + plugin.config.getString("Permissions.PermissionsEx.Group"));
 				if (plugin.config.getBoolean("Permissions.SendMessageOnGroupChange") == true ) {
 					Player[] players = plugin.getServer().getOnlinePlayers();
