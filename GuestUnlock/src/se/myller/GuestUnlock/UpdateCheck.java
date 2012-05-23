@@ -20,7 +20,7 @@ public class UpdateCheck implements Runnable {
 	public void run() {
 		try {
 			plugin.log("Starting updatecheck", true, Level.INFO);
-			final String address = "https://raw.github.com/Mylleranton/GuestUnlock/83eff113a48c76bdfea3b9128ae8b5d67c43f017/GuestUnlockVersion.txt";
+			final String address = "https://raw.github.com/Mylleranton/GuestUnlock/master/GuestUnlock/Version.txt";
 			final URL url = new URL(address.replace(" ", "%20"));
 			final URLConnection conn = url.openConnection();
 			conn.setConnectTimeout(8000);
