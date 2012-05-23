@@ -46,7 +46,7 @@ public class UpdateCheck implements Runnable {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		} finally {
-			plugin.log("[GuestUnlock] Finished updatecheck", true, Level.INFO);
+			plugin.log("Finished updatecheck", true, Level.INFO);
 		}
 		
 	}
