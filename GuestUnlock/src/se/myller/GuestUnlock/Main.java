@@ -30,9 +30,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import se.myller.GuestUnlock.Checks.ConfigUpdateCheck;
 import se.myller.GuestUnlock.Checks.PasswordCheck;
 import se.myller.GuestUnlock.Checks.PluginUpdateCheck;
-import se.myller.GuestUnlock.Commands.CMDguestunlock;
-import se.myller.GuestUnlock.Commands.CMDgupassword;
-import se.myller.GuestUnlock.Commands.CMDgutest;
+import se.myller.GuestUnlock.Commands.GuestUnlock;
+import se.myller.GuestUnlock.Commands.GuPassword;
+import se.myller.GuestUnlock.Commands.GuTest;
 import se.myller.GuestUnlock.Listeners.JoinListener;
 import se.myller.GuestUnlock.Permission.PermGroupManager;
 import se.myller.GuestUnlock.Permission.PermPermissionsEx;
@@ -57,9 +57,9 @@ public class Main extends JavaPlugin {
 	public PermGroupManager groupManager;
 	public PermbPermissions bPermissions;
 	public PermPermissionsEx permissionsEx;
-	public CMDguestunlock guestUnlock;
-	public CMDgupassword guPassword;
-	public CMDgutest guTest;
+	public GuestUnlock guestUnlock;
+	public GuPassword guPassword;
+	public GuTest guTest;
 	public PluginUpdateCheck updateCheck;
 	public DataHandler dataHandler;
 	public ConfigUpdateCheck configUpdateCheck;
@@ -72,9 +72,9 @@ public class Main extends JavaPlugin {
 	public boolean isNewConfigAvailable = false;
 
 	public Main() {
-		guestUnlock = new CMDguestunlock(this);
-		guPassword = new CMDgupassword(this);
-		guTest = new CMDgutest(this);
+		guestUnlock = new GuestUnlock(this);
+		guPassword = new GuPassword(this);
+		guTest = new GuTest(this);
 		updateCheck = new PluginUpdateCheck(this);
 		dataHandler = new DataHandler(this);
 		configUpdateCheck = new ConfigUpdateCheck(this);
@@ -92,7 +92,7 @@ public class Main extends JavaPlugin {
 		logger = Logger.getLogger("Minecraft.GuestUnlock");
 
 		// Get the config
-		config = getConfig();
+		config = this.getConfig();
 
 		// Debug
 		isDebugEnabled = config.getBoolean("Admin.Debug");
@@ -102,7 +102,7 @@ public class Main extends JavaPlugin {
 			passwordCheck.checkPassword();
 		}
 		// Get the plugin.yml
-		PluginDescriptionFile pdfFile = getDescription();
+		PluginDescriptionFile pdfFile = this.getDescription();
 
 		// Msg to the console
 		log("==================================", false, Level.INFO);
@@ -179,7 +179,7 @@ public class Main extends JavaPlugin {
 		logger = Logger.getLogger("Minecraft.GuestUnlock");
 
 		// Get the plugin.yml
-		PluginDescriptionFile pdfFile = getDescription();
+		PluginDescriptionFile pdfFile = this.getDescription();
 
 		// Stop the running task
 		Bukkit.getServer().getScheduler().cancelTask(RunningTask.threadID);
