@@ -4,40 +4,39 @@ import java.io.File;
 import java.util.logging.Level;
 
 public class DataHandler {
-	
+
 	private Main plugin;
 	public boolean directoryExixts = false;
 	public boolean configFileExists = false;
-	
-	
-	
+
 	public DataHandler(Main instance) {
 		plugin = instance;
 	}
+
 	/*
 	 * 
 	 * Make our config + directory
-	 * 
 	 */
 	public boolean createDataDirectory() {
-	    File file = plugin.getDataFolder();
-	    if (!file.isDirectory()) {
-	        if (!file.mkdirs()) {
+		File file = plugin.getDataFolder();
+		if (!file.isDirectory()) {
+			if (!file.mkdirs()) {
 				plugin.log("Failed to create directory", false, Level.SEVERE);
 				plugin.log("Disabling Plugin.", false, Level.SEVERE);
 				plugin.pluginManager.disablePlugin(plugin);
-	            return false;
-	        } else {
-		    	plugin.log("Created directory sucessfully!", false, Level.INFO);
-	        	directoryExixts = true;
-		    	return true;
-	        }
-	    } else {
-        	plugin.log("Directory exixts", true, Level.INFO);
-        	directoryExixts = true;
-	    }
-	    return true;
+				return false;
+			} else {
+				plugin.log("Created directory sucessfully!", false, Level.INFO);
+				directoryExixts = true;
+				return true;
+			}
+		} else {
+			plugin.log("Directory exixts", true, Level.INFO);
+			directoryExixts = true;
+		}
+		return true;
 	}
+
 	public boolean createConfigFile() {
 		File configFile = new File("plugins/GuestUnlock/config.yml");
 		if (!configFile.exists()) {

@@ -17,22 +17,23 @@
  */
 package se.myller.GuestUnlock;
 
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.anjocaido.groupmanager.GroupManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import se.myller.GuestUnlock.Checks.ConfigUpdateCheck;
+import se.myller.GuestUnlock.Checks.PasswordCheck;
+import se.myller.GuestUnlock.Checks.PluginUpdateCheck;
 import se.myller.GuestUnlock.Commands.CMDguestunlock;
 import se.myller.GuestUnlock.Commands.CMDgupassword;
 import se.myller.GuestUnlock.Commands.CMDgutest;
+import se.myller.GuestUnlock.Listeners.JoinListener;
 import se.myller.GuestUnlock.Permission.PermGroupManager;
 import se.myller.GuestUnlock.Permission.PermPermissionsEx;
 import se.myller.GuestUnlock.Permission.PermbPermissions;
@@ -50,9 +51,7 @@ public class Main extends JavaPlugin {
 	public Logger logger;
 	public FileConfiguration config;
 
-	public static int threadID = 0;
-	public static long messageInterval;
-
+	// Class references
 	public PluginManager pluginManager;
 	public GroupManager groupMan;
 	public PermGroupManager groupManager;
@@ -61,21 +60,25 @@ public class Main extends JavaPlugin {
 	public CMDguestunlock guestUnlock;
 	public CMDgupassword guPassword;
 	public CMDgutest guTest;
-	public UpdateCheck updateCheck;
+	public PluginUpdateCheck updateCheck;
 	public DataHandler dataHandler;
+	public ConfigUpdateCheck configUpdateCheck;
+	public RunningTask runningTask;
+	public PasswordCheck passwordCheck;
 
-	public boolean passwordCheck = false;
+	public boolean isPasswordOK = false;
 	public boolean hasNewVersion = false;
-	private boolean isDebugEnabled;
+	public boolean isDebugEnabled;
 	public boolean isNewConfigAvailable = false;
-	private int newestConfigVersion = 4;
 
 	public Main() {
 		guestUnlock = new CMDguestunlock(this);
 		guPassword = new CMDgupassword(this);
 		guTest = new CMDgutest(this);
-		updateCheck = new UpdateCheck(this);
+		updateCheck = new PluginUpdateCheck(this);
 		dataHandler = new DataHandler(this);
+		configUpdateCheck = new ConfigUpdateCheck(this);
+		runningTask = new RunningTask(this);
 	}
 
 	/*
@@ -96,10 +99,10 @@ public class Main extends JavaPlugin {
 
 		// Check The Password
 		if (isDebugEnabled) {
-			checkPassword();
+			passwordCheck.checkPassword();
 		}
 		// Get the plugin.yml
-		PluginDescriptionFile pdfFile = this.getDescription();
+		PluginDescriptionFile pdfFile = getDescription();
 
 		// Msg to the console
 		log("==================================", false, Level.INFO);
@@ -117,9 +120,8 @@ public class Main extends JavaPlugin {
 			dataHandler.createConfigFile();
 		}
 
-
 		// Start the timer
-		RepeatMessages();
+		runningTask.StartTimer();
 
 		// Register our commands
 		CommandExcecutor commandEx = new CommandExcecutor(this);
@@ -164,7 +166,7 @@ public class Main extends JavaPlugin {
 		updateCheck.run();
 
 		// Check config-version
-		checkConfigVersion();
+		configUpdateCheck.checkConfigVersion();
 	}
 
 	/*
@@ -177,38 +179,16 @@ public class Main extends JavaPlugin {
 		logger = Logger.getLogger("Minecraft.GuestUnlock");
 
 		// Get the plugin.yml
-		PluginDescriptionFile pdfFile = this.getDescription();
+		PluginDescriptionFile pdfFile = getDescription();
 
 		// Stop the running task
-		Bukkit.getServer().getScheduler().cancelTask(threadID);
+		Bukkit.getServer().getScheduler().cancelTask(RunningTask.threadID);
 
 		// Msg:s to the log
 		log("stopped running task!", true, Level.INFO);
 		log("version " + pdfFile.getVersion() + " by Myller is now Disabled!",
 				false, Level.INFO);
 
-	}
-
-	public void checkPassword() {
-		config.getString("Admin.Password").toString();
-		if (config.isString("Admin.Password")) {
-			passwordCheck = true;
-			log("Password OK", true, Level.INFO);
-			return;
-		} else {
-			config.set("Admin.Password", "GuestUnlock");
-			this.saveConfig();
-			passwordCheck = false;
-			log("Password is NOT OK!", true, Level.WARNING);
-			log("-------------------------------------------------", true,
-					Level.INFO);
-			log("Password MUST be a STRING!", true, Level.WARNING);
-			log("Password set to default value: 'GuestUnlock'", true,
-					Level.WARNING);
-			log("-------------------------------------------------", true,
-					Level.INFO);
-			return;
-		}
 	}
 
 	public void log(String message, boolean debug, Level level) {
@@ -224,53 +204,4 @@ public class Main extends JavaPlugin {
 		}
 	}
 
-	/*
-	 * 
-	 * Start the task
-	 */
-	public void RepeatMessages() {
-		messageInterval = config.getInt("Guest.RepeatingMessage.Interval") * 20;
-		threadID = Bukkit.getScheduler().scheduleSyncRepeatingTask(this,
-				new Runnable() {
-					@Override
-					public void run() {
-						try {
-							SendGuestMessage();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}, 0, messageInterval);
-	}
-
-	/*
-	 * 
-	 * The running task
-	 */
-	public void SendGuestMessage() throws IOException {
-		Player[] players = getServer().getOnlinePlayers();
-		for (Player player : players) {
-			if (player.hasPermission("GuestUnlock.guest")
-					&& !player.hasPermission("GuestUnlock.moderator")) {
-				if (config.getBoolean("Guest.RepeatingMessage.UseJoinMessage") == true) {
-					player.sendMessage(ChatColor.GREEN
-							+ config.getString("Guest.Join.Message"));
-				} else {
-					player.sendMessage(ChatColor.GREEN
-							+ config.getString("Guest.RepeatMessage.RepeatMessage"));
-				}
-			}
-		}
-	}
-
-	public void checkConfigVersion() {
-		int currentConfigVersion = config.getInt("Configuration-Version");
-		if (currentConfigVersion < newestConfigVersion) {
-			log("There is a new config-version available, you are currently using v"
-					+ currentConfigVersion
-					+ ", the latest is v"
-					+ newestConfigVersion, false, Level.INFO);
-			isNewConfigAvailable = true;
-		}
-	}
 }

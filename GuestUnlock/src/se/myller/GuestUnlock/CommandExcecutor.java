@@ -9,76 +9,78 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-
-
 /**
  * GuestUnlock for Bukkit
+ * 
  * @author Myller
  */
 public class CommandExcecutor implements CommandExecutor {
 
 	private Main plugin;
-    public CommandExcecutor(Main instance) {
-    	plugin = instance;
-    }
-    
-	
+
+	public CommandExcecutor(Main instance) {
+		plugin = instance;
+	}
+
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
+	public boolean onCommand(CommandSender sender, Command cmd,
+			String commandLabel, String[] args) {
 		// Get the name of the command
 		String cmdname = cmd.getName();
-		
+
 		// If sender = player
 		if (sender instanceof Player) {
 			if (cmdname.equalsIgnoreCase("gutest")) {
 				plugin.guTest.onCommand(sender);
-			}
-			else if (args.length == 0) {
+			} else if (args.length == 0) {
 				if (cmdname.equalsIgnoreCase("guestunlock")) {
 					plugin.guestUnlock.onCommandFail((Player) sender);
 					return true;
-				}
-				else if (cmdname.equalsIgnoreCase("gupassword")) {
+				} else if (cmdname.equalsIgnoreCase("gupassword")) {
 					plugin.guPassword.onCommandFail((Player) sender);
 					return true;
 				}
 				return false;
-			}
-			else if (args[0].equals("help")) {
+			} else if (args[0].equals("help")) {
 				if (cmdname.equalsIgnoreCase("guestunlock")) {
-					plugin.guestUnlock.onCommandHelp((Player)sender);
+					plugin.guestUnlock.onCommandHelp((Player) sender);
 					return true;
-				}
-				else if (cmdname.equalsIgnoreCase("gupassword")) {
-					plugin.guPassword.onCommandHelp((Player)sender);
+				} else if (cmdname.equalsIgnoreCase("gupassword")) {
+					plugin.guPassword.onCommandHelp((Player) sender);
 					return true;
 				}
 				return false;
-			}
-			else if (sender.hasPermission("GuestUnlock.guest") && cmdname.equalsIgnoreCase("guestunlock")) {
-				if  (args[0].equals(plugin.getConfig().getString("Admin.Password")) && args.length == 1) {
-					plugin.guestUnlock.cmdSend(sender, plugin.getConfig().getString("Admin.Password"));
+			} else if (sender.hasPermission("GuestUnlock.guest")
+					&& cmdname.equalsIgnoreCase("guestunlock")) {
+				if (args[0].equals(plugin.getConfig().getString(
+						"Admin.Password"))
+						&& (args.length == 1)) {
+					plugin.guestUnlock.cmdSend(sender, plugin.getConfig()
+							.getString("Admin.Password"));
 					return true;
-				} else if (sender.hasPermission("GuestUnlock.guest") && !args[0].equals(plugin.getConfig().getString("Admin.Password"))) {
+				} else if (sender.hasPermission("GuestUnlock.guest")
+						&& !args[0].equals(plugin.getConfig().getString(
+								"Admin.Password"))) {
 					plugin.guestUnlock.cmdFail(sender, args[0]);
 					return true;
 				}
-			}
-			else if (sender.hasPermission("GuestUnlock.admin") && cmdname.equalsIgnoreCase("gupassword")) {
+			} else if (sender.hasPermission("GuestUnlock.admin")
+					&& cmdname.equalsIgnoreCase("gupassword")) {
 				if (args.length == 1) {
 					plugin.guPassword.setPwd(sender, args[0]);
 					return true;
 				}
 			}
 		} else if (sender instanceof ConsoleCommandSender) {
-			if (cmdname.equalsIgnoreCase("gupassword") && args.length == 1) {
+			if (cmdname.equalsIgnoreCase("gupassword") && (args.length == 1)) {
 				plugin.guPassword.setPwd(sender, args[0]);
 				return true;
 			} else if (cmdname.equalsIgnoreCase("gutest")) {
 				plugin.guTest.onCommand(sender);
 				return true;
 			} else {
-				sender.sendMessage(ChatColor.RED + "[GuestUnlock] Must be a player to perform that command!");
+				sender.sendMessage(ChatColor.RED
+						+ "[GuestUnlock] Must be a player to perform that command!");
 				return true;
 			}
 		} else {
