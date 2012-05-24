@@ -27,6 +27,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import se.myller.GuestUnlock.Checks.ConfigCheck;
 import se.myller.GuestUnlock.Checks.ConfigUpdateCheck;
 import se.myller.GuestUnlock.Checks.PasswordCheck;
 import se.myller.GuestUnlock.Checks.PluginUpdateCheck;
@@ -65,6 +66,7 @@ public class Main extends JavaPlugin {
 	public ConfigUpdateCheck configUpdateCheck;
 	public RunningTask runningTask;
 	public PasswordCheck passwordCheck;
+	public ConfigCheck configCheck;
 
 	public boolean isPasswordOK = false;
 	public boolean hasNewVersion = false;
@@ -79,6 +81,8 @@ public class Main extends JavaPlugin {
 		dataHandler = new DataHandler(this);
 		configUpdateCheck = new ConfigUpdateCheck(this);
 		runningTask = new RunningTask(this);
+		configCheck = new ConfigCheck(this);
+		passwordCheck = new PasswordCheck(this);
 	}
 
 	/*
@@ -97,10 +101,6 @@ public class Main extends JavaPlugin {
 		// Debug
 		isDebugEnabled = config.getBoolean("Admin.Debug");
 
-		// Check The Password
-		if (isDebugEnabled) {
-			passwordCheck.checkPassword();
-		}
 		// Get the plugin.yml
 		PluginDescriptionFile pdfFile = this.getDescription();
 
@@ -108,6 +108,10 @@ public class Main extends JavaPlugin {
 		log("==================================", false, Level.INFO);
 		log("Loading", true, Level.INFO);
 		log("Checking password", true, Level.INFO);
+		// Check The Password
+		if (isDebugEnabled) {
+			passwordCheck.checkPassword();
+		}
 		log("Lets see if you want auto-group moving", true, Level.INFO);
 		log("Registering events", true, Level.INFO);
 
@@ -167,6 +171,7 @@ public class Main extends JavaPlugin {
 
 		// Check config-version
 		configUpdateCheck.checkConfigVersion();
+		configCheck.checkConfig();
 	}
 
 	/*
@@ -203,5 +208,4 @@ public class Main extends JavaPlugin {
 			logger.log(level, prefix + message);
 		}
 	}
-
 }

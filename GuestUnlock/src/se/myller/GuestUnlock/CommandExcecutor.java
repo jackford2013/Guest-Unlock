@@ -17,14 +17,12 @@ import org.bukkit.entity.Player;
 public class CommandExcecutor implements CommandExecutor {
 
 	private Main plugin;
-
 	public CommandExcecutor(Main instance) {
 		plugin = instance;
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd,
-			String commandLabel, String[] args) {
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		// Get the name of the command
 		String cmdname = cmd.getName();
 
