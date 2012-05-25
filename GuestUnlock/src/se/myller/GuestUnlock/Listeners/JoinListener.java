@@ -1,5 +1,7 @@
 package se.myller.GuestUnlock.Listeners;
 
+import java.util.logging.Level;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,9 +30,11 @@ public class JoinListener implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
+		plugin.log("DEBUG: Player " + player + " joined", true, Level.INFO);
 		if (plugin.getConfig().getBoolean("Guest.Join.Enable")) {
 			if (player.hasPermission("GuestUnlock.guest")
 					&& !player.hasPermission("GuestUnlock.moderator")) {
+				plugin.log("DEBUG: Sending GuestJoinMessage", true, Level.INFO);
 				player.sendMessage(ChatColor.AQUA + "[GuestUnlock] "
 						+ ChatColor.GREEN
 						+ plugin.getConfig().getString("Guest.Join.Message"));

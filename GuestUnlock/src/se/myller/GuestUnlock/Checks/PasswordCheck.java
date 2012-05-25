@@ -13,6 +13,7 @@ public class PasswordCheck {
 	}
 	
 	public void checkPassword() {
+		plugin.log("DEBUG: Checking password", true, Level.INFO);
 		try {
 			if (plugin.config.isString("Admin.Password")
 					&& !plugin.config.getString("Admin.Password").isEmpty()) {

@@ -24,9 +24,10 @@ public class PermPermissionsEx {
 	 * PermissionsEx
 	 */
 	public void getPex() {
+		plugin.log("DEBUG: Getting PermissionsEx", true, Level.INFO);
 		Plugin pex = plugin.pluginManager.getPlugin("PermissionsEx");
 		if (pex != null) {
-			if (pex.getClass().getName().equals("ru.tehkode.permissions")) {
+			if (pex.getClass().getName().equals("ru.tehkode.permissions.bukkit.PermissionsEx")) {
 				plugin.log(" =====   Found PermissionEx!", true, Level.INFO);
 			} else {
 				plugin.log(" -----------------------------------------", true,
@@ -57,27 +58,31 @@ public class PermPermissionsEx {
 	}
 
 	public void setGroupPEX(Player player) {
+		plugin.log("DEBUG: Initializing " + player.getName() + "s group change", true, Level.INFO);
 		PermissionUser user = PermissionsEx.getUser(player);
 		String name = user.getName();
 		PermissionGroup[] userGroups = user.getGroups();
 		for (PermissionGroup pg : userGroups) {
+			plugin.logger.info(pg.toString());
 			if (pg.toString()
-					.equals((plugin.config
-							.getString("Permissions.PermissionsEx.Group.Default")))) {
+					.equals(("FileGroup(" + plugin.config
+							.getString("Permissions.PermissionsEx.Group.Default")) + ")")) {
+				plugin.log("DEBUG: Changing player " + player.getName() + "s group", true, Level.INFO);
 				user.setGroups(new String[] { plugin.config
-						.getString("Permissions.PermissionsEx.Group") });
+						.getString("Permissions.PermissionsEx.Group.Build") });
 				plugin.log("Set "
 								+ name
 								+ ":s group to "
-								+ plugin.config.getString("Permissions.PermissionsEx.Group"),
+								+ plugin.config.getString("Permissions.PermissionsEx.Group.Build"),
 						true, Level.INFO);
 				player.sendMessage(ChatColor.AQUA
 						+ "[GuestUnlock] "
 						+ ChatColor.GREEN
 						+ "Your group is now "
 						+ plugin.config
-								.getString("Permissions.PermissionsEx.Group"));
+								.getString("Permissions.PermissionsEx.Group.Build"));
 				if (plugin.config.getBoolean("Permissions.SendMessageOnGroupChange")) {
+					plugin.log("DEBUG: Sending message to mods, cause: player group change", true, Level.INFO);
 					Player[] players = plugin.getServer().getOnlinePlayers();
 					for (Player p : players) {
 						if (p.hasPermission("GuestUnlock.moderator")) {
@@ -93,6 +98,7 @@ public class PermPermissionsEx {
 			} else {
 				player.sendMessage(ChatColor.AQUA + "[GuestUnlock]" + ChatColor.RED
 						+ "Haha, tricky one, you doesnt belong to the default group!");
+				plugin.log("DEBUG: Someone tried to send the password but wasn´t in the default group.", true, Level.INFO);
 			}
 		}
 	}

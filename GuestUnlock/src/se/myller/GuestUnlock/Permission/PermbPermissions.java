@@ -23,6 +23,7 @@ public class PermbPermissions {
 	 * bPermissions
 	 */
 	public void getBP() {
+		plugin.log("DEBUG: Getting bPermissions", true, Level.INFO);
 		Plugin BP = plugin.pluginManager.getPlugin("bPermissions");
 		if (BP != null) {
 			if (BP.getClass().getName()
@@ -59,27 +60,25 @@ public class PermbPermissions {
 	}
 
 	public void setGroupBP(Player p) {
+		plugin.log("DEBUG: Changing player " + p.getName() + "s group", true, Level.INFO);
 		if (ApiLayer.hasGroup(p.getWorld().getName(), CalculableType.USER, p
 				.getName(), plugin.config
 				.getString("Permissions.bPermissions.Group.Default"))) {
 			ApiLayer.setGroup(p.getWorld().getName(), CalculableType.USER, p
 					.getName(), plugin.config
 					.getString("Permissions.bPermissions.Group.Build"));
-			plugin.log(
-					"Set "
+			plugin.log("Set "
 							+ p.getName()
 							+ ":s group to "
-							+ plugin.config
-									.getString("Permissions.bPermissions.Group.Build"),
+							+ plugin.config.getString("Permissions.bPermissions.Group.Build"),
 					true, Level.INFO);
 			p.sendMessage(ChatColor.AQUA
 					+ "[GuestUnlock] "
 					+ ChatColor.GREEN
 					+ "Your group is now "
-					+ plugin.config
-							.getString("Permissions.bPermissions.Group.Build"));
-			if (plugin.config
-					.getBoolean("Permissions.SendMessageOnGroupChange") == true) {
+					+ plugin.config.getString("Permissions.bPermissions.Group.Build"));
+			if (plugin.config.getBoolean("Permissions.SendMessageOnGroupChange")) {
+				plugin.log("DEBUG: Sending message to mods, cause: player group change", true, Level.INFO);
 				Player[] players = plugin.getServer().getOnlinePlayers();
 				for (Player player : players) {
 					if (player.hasPermission("GuestUnlock.moderator")) {
@@ -96,6 +95,7 @@ public class PermbPermissions {
 					+ "[GuestUnlock] "
 					+ ChatColor.RED
 					+ "Haha, tricky one, you doesnt belong to the default group!");
+			plugin.log("DEBUG: Someone tried to send the password but wasn´t in the default group.", true, Level.INFO);
 		}
 	}
 

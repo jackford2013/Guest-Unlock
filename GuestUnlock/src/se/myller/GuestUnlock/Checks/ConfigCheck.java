@@ -18,6 +18,7 @@ public class ConfigCheck {
 		plugin = instance;
 	}
 	public boolean checkConfig() {
+		plugin.log("DEBUG: Checking config", true, Level.INFO);
 		conf = plugin.getConfig();
 		Set<String> allConfNodes = conf.getKeys(true);
 		for (String s : allConfNodes) {
@@ -33,21 +34,21 @@ public class ConfigCheck {
 			plugin.log("ERROR IN CONFIG, there is an error with a String, please check and reload.", false, Level.SEVERE);
 			return false;
 		} else {
-			plugin.log("Your config is fine!", true, Level.INFO);
+			plugin.log("Your config-strings are fine!", true, Level.INFO);
 			numberString = 0;
 		}
 		if (numberBool != 8) {
 			plugin.log("ERROR IN CONFIG, there is an error with a Boolean, please check and reload.", false, Level.SEVERE);
 			return false;
 		} else {
-			plugin.log("Your config is fine!", true, Level.INFO);
+			plugin.log("Your config-booleans are fine!", true, Level.INFO);
 			numberBool = 0;
 		}
 		if (numberInt != 2) {
 			plugin.log("ERROR IN CONFIG, there is an error with an Integer, please check and reload.", false, Level.SEVERE);
 			return false;
 		} else {
-			plugin.log("Your config is fine!", true, Level.INFO);
+			plugin.log("Your config-integers are fine!", true, Level.INFO);
 			numberInt = 0;
 		}
 		return false;

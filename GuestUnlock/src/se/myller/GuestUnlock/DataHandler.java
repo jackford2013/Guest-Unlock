@@ -18,6 +18,7 @@ public class DataHandler {
 	 * Make our config + directory
 	 */
 	public boolean createDataDirectory() {
+		plugin.log("DEBUG: Trying to create directory", true, Level.INFO);
 		File file = plugin.getDataFolder();
 		if (!file.isDirectory()) {
 			if (!file.mkdirs()) {
@@ -38,6 +39,7 @@ public class DataHandler {
 	}
 
 	public boolean createConfigFile() {
+		plugin.log("DEBUG: Trying to create config.yml", true, Level.INFO);
 		File configFile = new File("plugins/GuestUnlock/config.yml");
 		if (!configFile.exists()) {
 			try {

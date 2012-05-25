@@ -23,11 +23,13 @@ public class CommandExcecutor implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+		plugin.log("DEBUG: " + sender.getName() + " used a command", true, Level.INFO);
 		// Get the name of the command
 		String cmdname = cmd.getName();
 
 		// If sender = player
 		if (sender instanceof Player) {
+			plugin.log("DEBUG: Sender is a player", true, Level.INFO);
 			if (cmdname.equalsIgnoreCase("gutest")) {
 				plugin.guTest.onCommand(sender);
 			} else if (args.length == 0) {
@@ -70,6 +72,7 @@ public class CommandExcecutor implements CommandExecutor {
 				}
 			}
 		} else if (sender instanceof ConsoleCommandSender) {
+			plugin.log("DEBUG: Sender is a ConsoleCommandSender", true, Level.INFO);
 			if (cmdname.equalsIgnoreCase("gupassword") && (args.length == 1)) {
 				plugin.guPassword.setPwd(sender, args[0]);
 				return true;

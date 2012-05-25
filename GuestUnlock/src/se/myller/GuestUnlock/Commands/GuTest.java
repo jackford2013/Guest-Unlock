@@ -1,5 +1,7 @@
 package se.myller.GuestUnlock.Commands;
 
+import java.util.logging.Level;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -14,6 +16,7 @@ public class GuTest {
 	}
 
 	public boolean onCommand(CommandSender sender) {
+		plugin.log("DEBUG: " + sender.getName() + " used command: /gutest", true, Level.INFO);
 		if (sender.hasPermission("GuestUnlock.admin")) {
 			sender.sendMessage(ChatColor.RED
 					+ "===============================");

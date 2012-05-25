@@ -19,6 +19,7 @@ public class PluginUpdateCheck implements Runnable {
 
 	@Override
 	public void run() {
+		plugin.log("DEBUG: Checking for plugin-updates", true, Level.INFO);
 		try {
 			plugin.log("Starting updatecheck", true, Level.INFO);
 			final String address = "https://raw.github.com/Mylleranton/GuestUnlock/master/GuestUnlock/Version.txt";

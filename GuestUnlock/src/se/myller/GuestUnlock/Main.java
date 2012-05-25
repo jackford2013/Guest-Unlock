@@ -164,7 +164,6 @@ public class Main extends JavaPlugin {
 		}
 		log("version " + pdfFile.getVersion() + " by Myller is now Enabled!",
 				false, Level.INFO);
-		log("==================================", false, Level.INFO);
 
 		// Check for updates
 		updateCheck.run();
@@ -172,6 +171,7 @@ public class Main extends JavaPlugin {
 		// Check config-version
 		configUpdateCheck.checkConfigVersion();
 		configCheck.checkConfig();
+		log("==================================", false, Level.INFO);
 	}
 
 	/*

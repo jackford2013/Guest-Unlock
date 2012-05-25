@@ -21,6 +21,7 @@ public class GuestUnlock implements Command {
 	 * Handle our commands
 	 */
 	public boolean cmdSend(CommandSender s, String pwd) {
+		plugin.log("DEBUG: " + s.getName() + " sent a password", true, Level.INFO);
 		s.sendMessage(ChatColor.GREEN
 				+ plugin.config.getString("Guest.Responds.Correct"));
 		plugin.log(s.getName() + " has sent the correct password!", false,
@@ -65,9 +66,10 @@ public class GuestUnlock implements Command {
 	}
 
 	public boolean cmdFail(CommandSender s, String pwd) {
+		plugin.log("DEBUG: " + s.getName() + " sent a password", true, Level.INFO);
 		s.sendMessage(ChatColor.RED
 				+ plugin.config.getString("Guest.Responds.Incorrect"));
-		if (plugin.config.getBoolean("Admin.SendIncorrectMessageToMods") == true) {
+		if (plugin.config.getBoolean("Admin.SendIncorrectMessageToMods")) {
 			plugin.log("The player " + s.getName()
 					+ " tried to send this password: " + pwd, false,
 					Level.WARNING);

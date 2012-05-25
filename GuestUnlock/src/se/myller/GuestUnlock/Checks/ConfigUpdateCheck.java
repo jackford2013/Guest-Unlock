@@ -14,6 +14,7 @@ public class ConfigUpdateCheck {
 	}
 
 	public void checkConfigVersion() {
+		plugin.log("DEBUG: Checking config-version", true, Level.INFO);
 		int currentConfigVersion = plugin.config
 				.getInt("Configuration-Version");
 		if (currentConfigVersion < newestConfigVersion) {

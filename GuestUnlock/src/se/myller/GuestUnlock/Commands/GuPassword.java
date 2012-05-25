@@ -1,5 +1,7 @@
 package se.myller.GuestUnlock.Commands;
 
+import java.util.logging.Level;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -15,6 +17,7 @@ public class GuPassword implements Command {
 	}
 
 	public boolean setPwd(CommandSender s, String newPwd) {
+		plugin.log("DEBUG: " + s.getName() + " changed the password", true, Level.INFO);
 		plugin.config.set("Admin.Password", newPwd);
 		plugin.saveConfig();
 		s.sendMessage(ChatColor.AQUA + "[GuestUnlock] " + ChatColor.YELLOW

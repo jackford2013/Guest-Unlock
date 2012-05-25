@@ -24,6 +24,7 @@ public class PermGroupManager {
 	 * GroupManager
 	 */
 	public void getGM() {
+		plugin.log("DEBUG: Getting GroupManager", true, Level.INFO);
 		Plugin GM = plugin.pluginManager.getPlugin("GroupManager");
 
 		if (GM != null) {
@@ -61,6 +62,7 @@ public class PermGroupManager {
 	}
 
 	public boolean setGroupGM(final Player base) {
+		plugin.log("DEBUG: Changing player " + base.getName() + "s group", true, Level.INFO);
 		final OverloadedWorldHolder handler = plugin.groupMan.getWorldsHolder()
 				.getWorldData(base);
 		if (handler == null) {
@@ -68,27 +70,22 @@ public class PermGroupManager {
 		}
 		if (handler.getUser(base.getName()).getGroupName()
 				.equals("Permissions.GroupManager.Group.Default")) {
-			handler.getUser(base.getName())
-					.setGroup(
-							handler.getGroup(plugin.config
+			handler.getUser(base.getName()).setGroup(handler.getGroup(plugin.config
 									.getString("Permissions.GroupManager.Group.Build")));
-			plugin.log(
-					"Set "
+			plugin.log("Set "
 							+ base.getName()
 							+ ":s group to "
-							+ plugin.config
-									.getString("Permissions.GroupManager.Group.Build"),
+							+ plugin.config.getString("Permissions.GroupManager.Group.Build"),
 					true, Level.INFO);
 			base.sendMessage(ChatColor.AQUA
 					+ "[GuestUnlock] "
 					+ ChatColor.GREEN
 					+ "Your group is now "
-					+ plugin.config
-							.getString("Permissions.GroupManager.Group.Build"));
+					+ plugin.config.getString("Permissions.GroupManager.Group.Build"));
 			handler.reloadGroups();
 			handler.reloadUsers();
-			if (plugin.config
-					.getBoolean("Permissions.SendMessageOnGroupChange") == true) {
+			if (plugin.config.getBoolean("Permissions.SendMessageOnGroupChange")) {
+				plugin.log("DEBUG: Sending message to mods, cause: player group change", true, Level.INFO);
 				Player[] players = plugin.getServer().getOnlinePlayers();
 				for (Player player : players) {
 					if (player.hasPermission("GuestUnlock.moderator")) {
@@ -106,6 +103,7 @@ public class PermGroupManager {
 					+ "[GuestUnlock] "
 					+ ChatColor.RED
 					+ "Haha, tricky one, you doesnt belong to the default group!");
+			plugin.log("DEBUG: Someone tried to send the password but wasn´t in the default group.", true, Level.INFO);
 		}
 		return false;
 
