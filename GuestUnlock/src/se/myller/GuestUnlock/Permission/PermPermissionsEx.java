@@ -66,12 +66,10 @@ public class PermPermissionsEx {
 							.getString("Permissions.PermissionsEx.Group.Default")))) {
 				user.setGroups(new String[] { plugin.config
 						.getString("Permissions.PermissionsEx.Group") });
-				plugin.log(
-						"Set "
+				plugin.log("Set "
 								+ name
 								+ ":s group to "
-								+ plugin.config
-										.getString("Permissions.PermissionsEx.Group"),
+								+ plugin.config.getString("Permissions.PermissionsEx.Group"),
 						true, Level.INFO);
 				player.sendMessage(ChatColor.AQUA
 						+ "[GuestUnlock] "
@@ -79,8 +77,7 @@ public class PermPermissionsEx {
 						+ "Your group is now "
 						+ plugin.config
 								.getString("Permissions.PermissionsEx.Group"));
-				if (plugin.config
-						.getBoolean("Permissions.SendMessageOnGroupChange") == true) {
+				if (plugin.config.getBoolean("Permissions.SendMessageOnGroupChange")) {
 					Player[] players = plugin.getServer().getOnlinePlayers();
 					for (Player p : players) {
 						if (p.hasPermission("GuestUnlock.moderator")) {
@@ -93,10 +90,10 @@ public class PermPermissionsEx {
 					}
 				}
 				return;
+			} else {
+				player.sendMessage(ChatColor.AQUA + "[GuestUnlock]" + ChatColor.RED
+						+ "Haha, tricky one, you doesnt belong to the default group!");
 			}
 		}
-		player.sendMessage(ChatColor.AQUA + "[GuestUnlock]" + ChatColor.RED
-				+ "Haha, tricky one, you doesnt belong to the default group!");
 	}
-
 }
