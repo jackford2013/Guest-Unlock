@@ -30,7 +30,7 @@ public class JoinListener implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		plugin.log("DEBUG: Player " + player + " joined", true, Level.INFO);
+		plugin.log("DEBUG: Player " + player.getName() + " joined", true, Level.INFO);
 		if (plugin.getConfig().getBoolean("Guest.Join.Enable")) {
 			if (player.hasPermission("GuestUnlock.guest")
 					&& !player.hasPermission("GuestUnlock.moderator")) {
