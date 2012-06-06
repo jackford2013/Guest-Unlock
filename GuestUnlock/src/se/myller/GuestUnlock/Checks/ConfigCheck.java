@@ -22,6 +22,7 @@ public class ConfigCheck {
 		conf = plugin.getConfig();
 		Set<String> allConfNodes = conf.getKeys(true);
 		for (String s : allConfNodes) {
+		    if (s.contains(".")) {
 			if (conf.isString(s)) {
 				numberString++;
 			} else if (conf.isBoolean(s)) {
@@ -29,8 +30,10 @@ public class ConfigCheck {
 			} else if (conf.isInt(s)) {
 				numberInt++;
 			}
+		    }
 		}
-		if (numberString != 10) {
+		plugin.logger.info("" + numberString + " " + numberBool + " " + numberInt);
+		if (numberString != 11) {
 			plugin.log("ERROR IN CONFIG, there is an error with a String, please check and reload.", false, Level.SEVERE);
 			return false;
 		} else {
@@ -44,7 +47,7 @@ public class ConfigCheck {
 			plugin.log("Your config-booleans are fine!", true, Level.INFO);
 			numberBool = 0;
 		}
-		if (numberInt != 2) {
+		if (numberInt != 1) {
 			plugin.log("ERROR IN CONFIG, there is an error with an Integer, please check and reload.", false, Level.SEVERE);
 			return false;
 		} else {

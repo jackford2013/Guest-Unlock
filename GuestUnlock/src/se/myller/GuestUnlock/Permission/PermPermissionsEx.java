@@ -98,7 +98,7 @@ public class PermPermissionsEx {
 			} else {
 				player.sendMessage(ChatColor.AQUA + "[GuestUnlock]" + ChatColor.RED
 						+ "Haha, tricky one, you doesnt belong to the default group!");
-				plugin.log("DEBUG: Someone tried to send the password but wasn´t in the default group.", true, Level.INFO);
+				plugin.log("DEBUG: Someone tried to send the password but was not in the default group.", true, Level.INFO);
 			}
 		}
 	}

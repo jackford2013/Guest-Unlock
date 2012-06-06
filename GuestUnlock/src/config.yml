@@ -15,7 +15,7 @@ Guest:
     RepeatingMessage:
         Interval: 60
         UseJoinMessage: true
-        RepeatMessage: null
+        RepeatMessage: ""
     Responds:
         Correct: The password was correct!
         Incorrect: The password was incorrect!
