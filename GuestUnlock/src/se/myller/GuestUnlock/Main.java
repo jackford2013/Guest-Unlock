@@ -81,8 +81,6 @@ public class Main extends JavaPlugin {
 		dataHandler = new DataHandler(this);
 		configUpdateCheck = new ConfigUpdateCheck(this);
 		runningTask = new RunningTask(this);
-		configCheck = new ConfigCheck(this);
-		passwordCheck = new PasswordCheck(this);
 	}
 
 	/*
@@ -120,10 +118,14 @@ public class Main extends JavaPlugin {
 		pluginManager.registerEvents(new JoinListener(this), this);
 
 		// Make our config + directory
-		if (dataHandler.createDataDirectory()) {
-			dataHandler.createConfigFile();
+		if (dataHandler.createDataDirectory() && dataHandler.createConfigFile()) {
+			passwordCheck = new PasswordCheck(this);
 		}
-
+		else if (dataHandler.createConfigFile()) {
+		    passwordCheck = new PasswordCheck(this);
+		}
+		
+		
 		// Start the timer
 		runningTask.StartTimer();
 
@@ -170,7 +172,6 @@ public class Main extends JavaPlugin {
 
 		// Check config-version
 		configUpdateCheck.checkConfigVersion();
-		configCheck.checkConfig();
 		log("==================================", false, Level.INFO);
 	}
 
