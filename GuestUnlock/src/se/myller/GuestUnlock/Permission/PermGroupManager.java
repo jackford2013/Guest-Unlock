@@ -68,15 +68,11 @@ public class PermGroupManager {
 		if (handler == null) {
 			return false;
 		}
-		if (handler.getUser(base.getName()).getGroupName()
-				.equals("Permissions.GroupManager.Group.Default")) {
-			handler.getUser(base.getName()).setGroup(handler.getGroup(plugin.config
-									.getString("Permissions.GroupManager.Group.Build")));
-			plugin.log("Set "
-							+ base.getName()
-							+ ":s group to "
-							+ plugin.config.getString("Permissions.GroupManager.Group.Build"),
-					true, Level.INFO);
+		plugin.log(handler.getUser(base.getName()).getGroupName(), true, Level.INFO);
+		plugin.log(plugin.config.getString("Permissions.GroupManager.Group.Build"), true, Level.INFO);
+		if (handler.getUser(base.getName()).getGroupName().equalsIgnoreCase(plugin.config.getString("Permissions.GroupManager.Group.Default"))) {
+			handler.getUser(base.getName()).setGroup(handler.getGroup(plugin.config.getString("Permissions.GroupManager.Group.Build")), true);
+			plugin.log("Set " + base.getName() + ":s group to " + plugin.config.getString("Permissions.GroupManager.Group.Build"), true, Level.INFO);
 			base.sendMessage(ChatColor.AQUA
 					+ "[GuestUnlock] "
 					+ ChatColor.GREEN

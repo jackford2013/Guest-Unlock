@@ -108,7 +108,7 @@ public class Main extends JavaPlugin {
 		log("Checking password", true, Level.INFO);
 		// Check The Password
 		if (isDebugEnabled) {
-			passwordCheck.checkPassword();
+		    new PasswordCheck(this).checkPassword();
 		}
 		log("Lets see if you want auto-group moving", true, Level.INFO);
 		log("Registering events", true, Level.INFO);
