@@ -27,7 +27,6 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import se.myller.GuestUnlock.Checks.ConfigCheck;
 import se.myller.GuestUnlock.Checks.ConfigUpdateCheck;
 import se.myller.GuestUnlock.Checks.PasswordCheck;
 import se.myller.GuestUnlock.Checks.PluginUpdateCheck;
@@ -66,7 +65,6 @@ public class Main extends JavaPlugin {
 	public ConfigUpdateCheck configUpdateCheck;
 	public RunningTask runningTask;
 	public PasswordCheck passwordCheck;
-	public ConfigCheck configCheck;
 
 	public boolean isPasswordOK = false;
 	public boolean hasNewVersion = false;
