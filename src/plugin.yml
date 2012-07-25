@@ -1,0 +1,36 @@
+name: GuestUnlock
+main: se.myller.GuestUnlock.Main
+version: 2.1.3
+description: >
+             This plugin is used to send a message to admins when a player types the correct password.
+commands:
+  gutest:
+    description: Test, aka ping-command
+    usage: /<command>
+    permission-message: You dont have sufficent permissions! You are missing <permission>
+    permission: GuestUnlock.admin
+  guestunlock:
+    description: Sends password to admins
+    usage: /<command> [Password]
+    aliases: [gunlock, gu]
+    permission-message: You dont have sufficent permissions! You are missing <permission>
+    permission: GuestUnlock.guest
+  gupassword:
+    description: Changes the correct password
+    usage: /<command> [New Password]
+    aliases: [gadmin, gpassword]
+    permission-message: You dont have sufficent permissions! You are missing <permission>
+    permission: GuestUnlock.admin
+
+permissions:
+  GuestUnlock.guest:
+    description: Seen as a Guest
+    default: false
+  GuestUnlock.moderator:
+    description: See message when someone sends the correct password
+    default: false
+  GuestUnlock.admin:
+    description: Change the password
+    default: op
+    children:
+      GuestUnlock.moderator: true
