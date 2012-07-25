@@ -21,7 +21,7 @@ public class UpdateCheck {
 	 */
 	private static final void check() {
 		try { 
-			final String address = "https://raw.github.com/Mylleranton/GuestUnlock/master/GuestUnlock/Version.txt";
+			final String address = "https://raw.github.com/Mylleranton/GuestUnlock/master/src/version.txt";
 			final URL url = new URL(address.replace(" ", "%20"));
 			final URLConnection conn = url.openConnection();
 			conn.setConnectTimeout(8000);
