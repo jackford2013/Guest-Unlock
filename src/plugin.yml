@@ -8,15 +8,10 @@ commands:
     description: Sends password to admins
     usage: /<command> [Password]
     aliases: [gunlock, gu]
-    permission-message: You dont have sufficent permissions! You are missing <permission>
-    permission: GuestUnlock.guest
   gupassword:
     description: Changes the correct password
     usage: /<command> [New Password]
     aliases: [gadmin, gpassword]
-    permission-message: You dont have sufficent permissions! You are missing <permission>
-    permission: GuestUnlock.admin
-
 permissions:
   guestunlock.guest:
     description: Seen as a Guest
