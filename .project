@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<<<<<<< HEAD:.project
-	<name>GuestUnlock-v2</name>
-=======
-	<name>GuestUnlock</name>
->>>>>>> 124f942e5fcc827b902c004d345cd71277e3bc71:.project
-	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
