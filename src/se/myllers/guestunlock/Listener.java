@@ -1,7 +1,10 @@
 package se.myllers.guestunlock;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Listener implements org.bukkit.event.Listener {
@@ -10,6 +13,7 @@ public class Listener implements org.bukkit.event.Listener {
 	 *  The latest version of the plugin. Set on plugin start.
 	 */
 	public static String pluginVersion;
+	public static boolean enableChat = false;
 	
 	/**
 	 * Called when a player joins the game.
@@ -22,21 +26,36 @@ public class Listener implements org.bukkit.event.Listener {
 	 */
 	@EventHandler
 	public void onPlayerJoin(final PlayerJoinEvent e) {
-		if (Permissions.isGuest(e.getPlayer())
-				&& !Permissions.isModerator(e.getPlayer())) {
+		if (Permission.isGuest(e.getPlayer())
+				&& !Permission.isModerator(e.getPlayer())) {
 			e.getPlayer().sendMessage(
 					ChatColor.GREEN
 							+ formatJoinMessage(
 									Main.config.getString("Guest.JoinMessage"),
 									e.getPlayer().getName()));
 		}
-		if (Permissions.isModerator(e.getPlayer())) {
+		if (Permission.isModerator(e.getPlayer())) {
 			if(!pluginVersion.equals(UpdateCheck.newestVersion)) {
 				e.getPlayer().sendMessage(ChatColor.YELLOW
 						+ "New version available for GuestUnlock: "
 						+ UpdateCheck.newestVersion);
 				e.getPlayer().sendMessage(ChatColor.YELLOW
 						+ "Please check http://dev.bukkit.org/server-mods/GuestUnlock");
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onChat(final AsyncPlayerChatEvent e) {
+		if(enableChat) {
+			if (e.getMessage().equalsIgnoreCase(Main.config.getString("Admin.Password"))) {
+				e.setCancelled(true);
+				e.getPlayer().sendMessage(ChatColor.RED + "You may not write the password in the chat!");
+				for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+					if(Permission.isModerator(p)) {
+						p.sendMessage(ChatColor.YELLOW + e.getPlayer().getName() + "s message contained the password. " + " Full message was: " + ChatColor.RED + e.getMessage());
+					}
+				}
 			}
 		}
 	}

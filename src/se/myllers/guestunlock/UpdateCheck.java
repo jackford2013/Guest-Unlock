@@ -10,7 +10,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 public class UpdateCheck {
 	
 	public static String newestVersion;
-	private static PluginDescriptionFile pdf;
+	public static PluginDescriptionFile pdf;
 	public UpdateCheck(PluginDescriptionFile pdf){
 		UpdateCheck.pdf = pdf;
 		check();

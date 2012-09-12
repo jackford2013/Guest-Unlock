@@ -24,7 +24,7 @@ public class CommandEx implements org.bukkit.command.CommandExecutor {
 		Main.DEBUG("Parsing command: " + cmdName + ", Sender: " + cs.getName());
 		if (cs instanceof Player) {
 			if (cmdName.equalsIgnoreCase("guestunlock")
-					&& Permissions.isGuest((Player) cs)) {
+					&& Permission.isGuest((Player) cs)) {
 				if (args.length == 1) {
 					onSendPassword(cs, args[0]);
 					return true;
@@ -32,7 +32,7 @@ public class CommandEx implements org.bukkit.command.CommandExecutor {
 					return false;
 				}
 			} else if (cmdName.equalsIgnoreCase("gupassword")
-					&& Permissions.isAdmin((Player) cs)) {
+					&& Permission.isAdmin((Player) cs)) {
 				if (args.length == 1) {
 					onChangePassword(cs, args[0]);
 					return true;
@@ -82,7 +82,7 @@ public class CommandEx implements org.bukkit.command.CommandExecutor {
 				PermSystem.setGroupBP((Player) p);
 			} else {
 				for (final Player x : Bukkit.getServer().getOnlinePlayers()) {
-					if (Permissions.isModerator(x)) {
+					if (Permission.isModerator(x)) {
 						modsOnline++;
 						x.sendMessage(ChatColor.BLUE + "The player: "
 								+ p.getName()
@@ -118,7 +118,7 @@ public class CommandEx implements org.bukkit.command.CommandExecutor {
 		Main.config.set("Admin.Password", newPass);
 		
 		for (final Player x : Bukkit.getServer().getOnlinePlayers()) {
-			if (Permissions.isModerator(x)) {
+			if (Permission.isModerator(x)) {
 				x.sendMessage(ChatColor.YELLOW + s.getName()
 						+ " changed the password to: " + newPass);
 			}

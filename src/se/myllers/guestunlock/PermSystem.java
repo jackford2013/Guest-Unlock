@@ -153,7 +153,7 @@ public class PermSystem {
 	 */
 	private static final void onGroupChange(final Player p) {
 		for (final Player x : Bukkit.getServer().getOnlinePlayers()) {
-			if (Permissions.isModerator(x)) {
+			if (Permission.isModerator(x)) {
 				x.sendMessage(ChatColor.YELLOW + x.getName()
 						+ " was moved to the build-group!");
 			}

@@ -29,7 +29,7 @@ public class Main extends JavaPlugin {
 	/**
 	 * The Main logger used to contact the console
 	 */
-	private static final Logger LOG = Logger.getLogger(Main.class.getName());
+	private static final Logger LOG = Logger.getLogger("GuestUnlock");
 	
 	/**
 	 * The Main config used to contact the config.yml
@@ -48,7 +48,7 @@ public class Main extends JavaPlugin {
 	/**
 	 * The Prefix for the logger
 	 */
-	private static final String PREFIX = "<<GuestUnlock>> ";
+	private static final String PREFIX = "[-GuestUnlock-] ";
 
 	/**
 	 * Called when the plugin is disabled
@@ -58,6 +58,14 @@ public class Main extends JavaPlugin {
 	public void onDisable() {
 		getServer().getScheduler().cancelTask(RepeatingTask.threadId);
 		INFO("Cancelled repeating task, shutting down..");
+		pm = null;
+		config = null;
+		Listener.enableChat = false;
+		Listener.pluginVersion = null;
+		UpdateCheck.newestVersion = null;
+		UpdateCheck.pdf = null;
+		RepeatingTask.threadId = 0;
+		INFO("Nulled all static variables");
 	}
 
 	/**
@@ -95,6 +103,10 @@ public class Main extends JavaPlugin {
 		new RepeatingTask(this);
 		
 		Listener.pluginVersion = this.getDescription().getVersion();
+		
+		if(config.getBoolean("Admin.CheckForPass")) {
+			Listener.enableChat = true;
+		}
 
 	}
 

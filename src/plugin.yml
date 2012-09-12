@@ -1,6 +1,6 @@
 name: GuestUnlock
 main: se.myllers.guestunlock.Main
-version: 3.1.1
+version: 3.2.0
 description: >
              This plugin is used to send a message to admins when a player types the correct password.
 commands:

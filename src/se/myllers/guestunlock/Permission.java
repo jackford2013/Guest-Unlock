@@ -2,7 +2,7 @@ package se.myllers.guestunlock;
 
 import org.bukkit.entity.Player;
 
-public class Permissions {
+public class Permission {
 
 	/**
 	 * Checks if a player is a Guest

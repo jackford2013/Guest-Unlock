@@ -32,7 +32,7 @@ public class RepeatingTask {
 	 */
 	public void next() {
 		for (final Player x : Bukkit.getOnlinePlayers()) {
-			if (Permissions.isGuest(x) && !Permissions.isModerator(x)) {
+			if (Permission.isGuest(x) && !Permission.isModerator(x)) {
 				x.sendMessage(ChatColor.GREEN
 						+ Main.config.getString("Guest.Message"));
 			}
