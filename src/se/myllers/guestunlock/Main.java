@@ -20,6 +20,7 @@ package se.myllers.guestunlock;
 
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -49,7 +50,12 @@ public class Main extends JavaPlugin {
 	 * The Prefix for the logger
 	 */
 	private static final String PREFIX = "[-GuestUnlock-] ";
-
+	
+	/**
+	 * 
+	 */
+	private static String version;
+	
 	/**
 	 * Called when the plugin is disabled
 	 * @see org.bukkit.plugin.java.JavaPlugin#onDisable()
@@ -63,7 +69,7 @@ public class Main extends JavaPlugin {
 		Listener.enableChat = false;
 		Listener.pluginVersion = null;
 		UpdateCheck.newestVersion = null;
-		UpdateCheck.pdf = null;
+		UpdateCheck.version = null;
 		RepeatingTask.threadId = 0;
 		INFO("Nulled all static variables");
 	}
@@ -101,6 +107,15 @@ public class Main extends JavaPlugin {
 
 		DEBUG("Starting RepeatingTask");
 		new RepeatingTask(this);
+		version = this.getDescription().getVersion();
+		
+		DEBUG("Checking for a new version");
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+			@Override
+			public void run() {
+				new UpdateCheck(Main.version);	
+			}
+		}, 120);
 		
 		Listener.pluginVersion = this.getDescription().getVersion();
 		

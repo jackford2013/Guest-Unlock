@@ -5,14 +5,12 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.bukkit.plugin.PluginDescriptionFile;
-
 public class UpdateCheck {
 	
 	public static String newestVersion;
-	public static PluginDescriptionFile pdf;
-	public UpdateCheck(PluginDescriptionFile pdf){
-		UpdateCheck.pdf = pdf;
+	public static String version;
+	public UpdateCheck(String version){
+		UpdateCheck.version = version;
 		check();
 	}
 	
@@ -31,7 +29,8 @@ public class UpdateCheck {
 					new InputStreamReader(conn.getInputStream()));
 			newestVersion = bufferedReader.readLine();
 			if (newestVersion != null) {
-				if (!pdf.getVersion().equals(newestVersion)) {
+				Listener.newestVersion = newestVersion;
+				if (!version.equals(newestVersion)) {
 					Main.INFO("Found a different version available: "
 							+ newestVersion);
 					Main.INFO(
@@ -45,6 +44,7 @@ public class UpdateCheck {
 			} else {
 				bufferedReader.close();
 				conn.getInputStream().close();
+				Main.DEBUG("'newestVersion == null'");
 			}
 		} catch (final Exception e) {
 			e.printStackTrace();

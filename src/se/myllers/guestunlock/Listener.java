@@ -13,6 +13,7 @@ public class Listener implements org.bukkit.event.Listener {
 	 *  The latest version of the plugin. Set on plugin start.
 	 */
 	public static String pluginVersion;
+	public static String newestVersion;
 	public static boolean enableChat = false;
 	
 	/**
@@ -35,7 +36,7 @@ public class Listener implements org.bukkit.event.Listener {
 									e.getPlayer().getName()));
 		}
 		if (Permission.isModerator(e.getPlayer())) {
-			if(!pluginVersion.equals(UpdateCheck.newestVersion)) {
+			if(!pluginVersion.equals(newestVersion)) {
 				e.getPlayer().sendMessage(ChatColor.YELLOW
 						+ "New version available for GuestUnlock: "
 						+ UpdateCheck.newestVersion);
