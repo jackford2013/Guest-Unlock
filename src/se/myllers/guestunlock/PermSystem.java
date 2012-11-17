@@ -117,7 +117,6 @@ public class PermSystem {
 						.getString("PermissionSystem.GroupManager.BuildGroup"));
 		// handler.getUser(p.getName()).setGroup(group);
 		handler.getUser(p.getName()).setGroup(group, true);
-		handler.reload();
 		
 		onGroupChange(p);
 		p.sendMessage(ChatColor.GREEN
