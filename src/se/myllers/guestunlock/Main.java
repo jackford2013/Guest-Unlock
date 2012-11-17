@@ -107,7 +107,6 @@ public class Main extends JavaPlugin {
 		if(config.getBoolean("Admin.CheckForPass")) {
 			Listener.enableChat = true;
 		}
-
 	}
 
 	/**

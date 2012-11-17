@@ -104,6 +104,13 @@ public class CommandEx implements org.bukkit.command.CommandExecutor {
 							+ " moderator online, they will contact you shortly");
 				}
 			}
+		} else {
+			p.sendMessage(ChatColor.RED + "You have sent an incorrect password!");
+			for (Player x : Bukkit.getOnlinePlayers()) {
+				if(Permission.isModerator(x)) {
+					x.sendMessage(ChatColor.RED + p.getName() + " has sent an incorrect password: " + pass);
+				}
+			}
 		}
 	}
 
@@ -114,7 +121,7 @@ public class CommandEx implements org.bukkit.command.CommandExecutor {
 	 * @param s - The CommandSender
 	 * @param newPass - The new password
 	 */
-	private void onChangePassword(final CommandSender s, final String newPass) {
+	private void onChangePassword(final CommandSender s, String newPass) {
 		Main.config.set("Admin.Password", newPass);
 		
 		for (final Player x : Bukkit.getServer().getOnlinePlayers()) {

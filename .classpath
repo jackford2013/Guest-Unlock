@@ -3,10 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Dropbox/Eclipse/Liberaries/bukkit-1.3.1-R2.0.jar"/>
 	<classpathentry kind="lib" path="C:/Kodning/Lib/bpermissions.jar"/>
+	<classpathentry kind="lib" path="C:/Kodning/Lib/PermissionsEx.jar"/>
 	<classpathentry kind="lib" path="C:/Kodning/Lib/EssentialsGroupBridge.jar"/>
 	<classpathentry kind="lib" path="C:/Kodning/Lib/EssentialsGroupManager.jar"/>
-	<classpathentry kind="lib" path="C:/Kodning/Lib/PermissionsEx.jar"/>
+	<classpathentry kind="lib" path="C:/Kodning/Lib/bukkit-1.4.5-R0.1-20121117.214011-4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

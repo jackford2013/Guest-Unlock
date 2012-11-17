@@ -117,6 +117,8 @@ public class PermSystem {
 						.getString("PermissionSystem.GroupManager.BuildGroup"));
 		// handler.getUser(p.getName()).setGroup(group);
 		handler.getUser(p.getName()).setGroup(group, true);
+		handler.reload();
+		
 		onGroupChange(p);
 		p.sendMessage(ChatColor.GREEN
 				+ "You have been moved to the build group!");
@@ -134,9 +136,11 @@ public class PermSystem {
 	 */
 	public static final void setGroupBP(final Player p) {
 		Main.DEBUG("Setting players group, BP");
+		
 		ApiLayer.setGroup(p.getWorld().getName(), CalculableType.USER,
 				p.getName(),
-				Main.config.getString("Permissions.bPermissions.BuildGroup"));
+				Main.config.getString("PermissionSystem.bPermissions.BuildGroup"));
+		ApiLayer.update();
 		onGroupChange(p);
 		p.sendMessage(ChatColor.GREEN
 				+ "You have been moved to the build group!");
