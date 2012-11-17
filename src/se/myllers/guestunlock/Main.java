@@ -52,7 +52,7 @@ public class Main extends JavaPlugin {
 	private static final String PREFIX = "[-GuestUnlock-] ";
 	
 	/**
-	 * 
+	 * The current version of GU
 	 */
 	private static String version;
 	
