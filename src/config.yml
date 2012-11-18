@@ -11,6 +11,7 @@
     # Password: The correct password #
     # Debug: Debug? #
     # CheckForPass: Wether to check for the password in chat-messages? And if it is there remove it #
+    # CheckForUpdate: Check for updates?
 ##########    
 # PermissionSystem section: Options for various permissionplugins support #
     # PEX/GM/BP #
@@ -25,6 +26,7 @@ Admin:
     Password: guestunlock
     Debug: false
     CheckForPass: false
+    CheckForUpdate: true
 PermissionSystem:
     PermissionsEx:
         Enable: false

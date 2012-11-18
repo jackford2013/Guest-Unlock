@@ -35,7 +35,7 @@ public class Listener implements org.bukkit.event.Listener {
 									Main.config.getString("Guest.JoinMessage"),
 									e.getPlayer().getName()));
 		}
-		if (Permission.isModerator(e.getPlayer())) {
+		if (Permission.isModerator(e.getPlayer()) && Main.config.getBoolean("Admin.CheckForUpdate")) {
 			if(!pluginVersion.equals(newestVersion)) {
 				e.getPlayer().sendMessage(ChatColor.YELLOW
 						+ "New version available for GuestUnlock: "

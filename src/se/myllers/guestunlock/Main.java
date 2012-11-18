@@ -109,13 +109,15 @@ public class Main extends JavaPlugin {
 		new RepeatingTask(this);
 		version = this.getDescription().getVersion();
 		
-		DEBUG("Checking for a new version");
-		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-			@Override
-			public void run() {
-				new UpdateCheck(Main.version);	
-			}
-		}, 120);
+		if(config.getBoolean("Admin.CheckForUpdate")) {
+			DEBUG("Checking for a new version");
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+				@Override
+				public void run() {
+					new UpdateCheck(Main.version);	
+				}
+			}, 120);
+		}
 		
 		Listener.pluginVersion = this.getDescription().getVersion();
 		
