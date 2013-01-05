@@ -30,34 +30,35 @@ public class Main extends JavaPlugin {
 	/**
 	 * The Main logger used to contact the console
 	 */
-	private static final Logger LOG = Logger.getLogger("GuestUnlock");
-	
+	private static final Logger		LOG		= Logger.getLogger("GuestUnlock");
+
 	/**
 	 * The Main config used to contact the config.yml
 	 * <p />
 	 * Initialized in onEnable()
 	 */
-	public static FileConfiguration config;
+	public static FileConfiguration	config;
 
 	/**
 	 * The Main PluginManager used to handle other plugins
 	 * <p />
 	 * Initialized in onEnable()
 	 */
-	public static PluginManager pm;
-	
+	public static PluginManager		pm;
+
 	/**
 	 * The Prefix for the logger
 	 */
-	private static final String PREFIX = "[-GuestUnlock-] ";
-	
+	private static final String		PREFIX	= "[GuestUnlock] ";
+
 	/**
 	 * The current version of GU
 	 */
-	private static String version;
-	
+	private static String			version;
+
 	/**
 	 * Called when the plugin is disabled
+	 * 
 	 * @see org.bukkit.plugin.java.JavaPlugin#onDisable()
 	 */
 	@Override
@@ -76,20 +77,20 @@ public class Main extends JavaPlugin {
 
 	/**
 	 * Called when the plugin is enabled
+	 * 
 	 * @see org.bukkit.plugin.java.JavaPlugin#onEnable()
 	 */
 	@Override
 	public void onEnable() {
-		config = this.getConfig();
+		config = getConfig();
 		DEBUG("Getting config");
-		
+
 		DEBUG("Creating FileHandler now");
 		new FileHandler(this);
 
 		DEBUG("Registering events and getting PluginManager");
 		pm = getServer().getPluginManager();
 		pm.registerEvents(new Listener(), this);
-
 
 		DEBUG("Getting commands and setting Executor");
 		final CommandEx commandEx = new CommandEx();
@@ -99,36 +100,40 @@ public class Main extends JavaPlugin {
 		DEBUG("Checking if PermSystem is enabled");
 		if (config.getBoolean("PermissionSystem.PermissionsEx.Enable")) {
 			PermSystem.getPEX();
-		} else if (config.getBoolean("PermissionSystem.GroupManager.Enable")) {
+		}
+		else if (config.getBoolean("PermissionSystem.GroupManager.Enable")) {
 			PermSystem.getGM();
-		} else if (config.getBoolean("PermissionSystem.bPermissions.Enable")) {
+		}
+		else if (config.getBoolean("PermissionSystem.bPermissions.Enable")) {
 			PermSystem.getBP();
 		}
 
 		DEBUG("Starting RepeatingTask");
 		new RepeatingTask(this);
-		version = this.getDescription().getVersion();
-		
-		if(config.getBoolean("Admin.CheckForUpdate")) {
-			DEBUG("Checking for a new version");
+		version = getDescription().getVersion();
+
+		if (config.getBoolean("Admin.CheckForUpdate")) {
+			DEBUG("Checking for a new version, current version: " + Main.version);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 				@Override
 				public void run() {
-					new UpdateCheck(Main.version);	
+					new UpdateCheck(Main.version);
 				}
 			}, 120);
 		}
-		
-		Listener.pluginVersion = this.getDescription().getVersion();
-		
-		if(config.getBoolean("Admin.CheckForPass")) {
+
+		Listener.pluginVersion = getDescription().getVersion();
+
+		if (config.getBoolean("Admin.CheckForPass")) {
 			Listener.enableChat = true;
 		}
 	}
 
 	/**
 	 * Prints msg as Logging Level.INFO to the console
-	 * @param msg - Message to print
+	 * 
+	 * @param msg
+	 *            - Message to print
 	 */
 	public static final void INFO(final String msg) {
 		LOG.info(PREFIX + msg);
@@ -136,7 +141,9 @@ public class Main extends JavaPlugin {
 
 	/**
 	 * Prints msg as Logging Level.WARNING to the console
-	 * @param msg - Message to print
+	 * 
+	 * @param msg
+	 *            - Message to print
 	 */
 	public static final void WARNING(final String msg) {
 		LOG.warning(PREFIX + msg);
@@ -144,19 +151,21 @@ public class Main extends JavaPlugin {
 
 	/**
 	 * Prints msg as Logging Level.SEVERE to the console
-	 * @param msg - Message to print
+	 * 
+	 * @param msg
+	 *            - Message to print
 	 */
 	public static final void SEVERE(final String msg) {
 		LOG.severe(PREFIX + msg);
 	}
 
 	/**
-	 * Prints msg as Logging Level.INFO to the console, but
-	 * contacts in DEBUG.
+	 * Prints msg as Logging Level.INFO to the console, but contacts in DEBUG.
 	 * <p />
-	 * NOTE: This message will only be visible if Debug = true 
-	 * in the config
-	 * @param msg - Message to print
+	 * NOTE: This message will only be visible if Debug = true in the config
+	 * 
+	 * @param msg
+	 *            - Message to print
 	 */
 	public static final void DEBUG(final String msg) {
 		if (config.getBoolean("Admin.Debug")) {

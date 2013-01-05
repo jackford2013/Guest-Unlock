@@ -9,7 +9,8 @@ public class Permission {
 	 * <p />
 	 * Permission: guestunlock.guest
 	 * 
-	 * @param p - The player to check
+	 * @param p
+	 *            - The player to check
 	 * @return true, if the player is a guest. Else false
 	 */
 	public static final boolean isGuest(final Player p) {
@@ -21,7 +22,8 @@ public class Permission {
 	 * <p />
 	 * Permission: guestunlock.moderator
 	 * 
-	 * @param p - The player to check
+	 * @param p
+	 *            - The player to check
 	 * @return true, if the player is a moderator. Else false
 	 */
 	public static final boolean isModerator(final Player p) {
@@ -33,7 +35,8 @@ public class Permission {
 	 * <p />
 	 * Permission: guestunlock.admin
 	 * 
-	 * @param p - The player to check
+	 * @param p
+	 *            - The player to check
 	 * @return true, if the player is a admin. Else false
 	 */
 	public static final boolean isAdmin(final Player p) {
