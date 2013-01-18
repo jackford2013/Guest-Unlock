@@ -32,7 +32,7 @@ public class UpdateCheck {
 					Main.INFO("Check http://dev.bukkit.org/server-mods/GuestUnlock/");
 				}
 				else {
-					Main.DEBUG("Did not found a new version");
+					Main.DEBUG("Did not find a new version");
 				}
 				bufferedReader.close();
 				conn.getInputStream().close();

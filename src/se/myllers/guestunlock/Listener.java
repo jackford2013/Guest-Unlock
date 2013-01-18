@@ -32,7 +32,7 @@ public class Listener implements org.bukkit.event.Listener {
 		}
 		if (Permission.isModerator(e.getPlayer()) && Main.config.getBoolean("Admin.CheckForUpdate")) {
 			if (!pluginVersion.equals(newestVersion)) {
-				e.getPlayer().sendMessage(ChatColor.YELLOW + "New version available for GuestUnlock: " + UpdateCheck.newestVersion);
+				e.getPlayer().sendMessage(ChatColor.YELLOW + "New version available for GuestUnlock: " + newestVersion);
 				e.getPlayer().sendMessage(ChatColor.YELLOW + "Please check http://dev.bukkit.org/server-mods/GuestUnlock");
 			}
 		}
@@ -41,7 +41,7 @@ public class Listener implements org.bukkit.event.Listener {
 	@EventHandler
 	public void onChat(final AsyncPlayerChatEvent e) {
 		if (enableChat) {
-			if (e.getMessage().equalsIgnoreCase(Main.config.getString("Admin.Password"))) {
+			if (e.getMessage().contains(Main.config.getString("Admin.Password"))) {
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(ChatColor.RED + "You may not write the password in the chat!");
 				for (final Player p : Bukkit.getServer().getOnlinePlayers()) {
