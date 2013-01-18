@@ -33,7 +33,8 @@ public class CommandEx implements org.bukkit.command.CommandExecutor {
 					return true;
 				}
 				else {
-					return false;
+					cs.sendMessage(ChatColor.RED + "You do not have sufficient permissions, or you formatted the command badly");
+					return true;
 				}
 			}
 			else if (cmdName.equalsIgnoreCase("gupassword") && Permission.isAdmin((Player) cs)) {
