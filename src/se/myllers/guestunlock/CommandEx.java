@@ -33,7 +33,8 @@ public class CommandEx implements org.bukkit.command.CommandExecutor {
 					return true;
 				}
 				else {
-					return false;
+					cs.sendMessage(ChatColor.RED + "You do not have sufficient permissions, or you formatted the command badly");
+					return true;
 				}
 			}
 			else if (cmdName.equalsIgnoreCase("gupassword") && Permission.isAdmin((Player) cs)) {
@@ -42,8 +43,13 @@ public class CommandEx implements org.bukkit.command.CommandExecutor {
 					return true;
 				}
 				else {
-					return false;
+					cs.sendMessage(ChatColor.RED + "You do not have sufficient permissions, or you formatted the command badly");
+					return true;
 				}
+			} 
+			else {
+				cs.sendMessage(ChatColor.RED + "You do not have sufficient permissions!");
+				return true;
 			}
 		}
 		else if (cs instanceof ConsoleCommandSender) {
@@ -77,34 +83,27 @@ public class CommandEx implements org.bukkit.command.CommandExecutor {
 			Main.INFO(p.getName() + " has sent the correct password!");
 
 			p.sendMessage(ChatColor.GREEN + "You have sent the correct password!");
-
-			if (Main.config.getBoolean("PermissionSystem.PermissionsEx.Enable")) {
-				PermSystem.setGroupPEX((Player) p);
+			if(Main.hookedIntoVault && Main.config.getBoolean("PermissionSystem.Vault.Enable")) {
+				PermSystem.setGroup((Player) p);
+				return;
 			}
-			else if (Main.config.getBoolean("PermissionSystem.GroupManager.Enable")) {
-				PermSystem.setGroupGM((Player) p);
+			for (final Player x : Bukkit.getServer().getOnlinePlayers()) {
+				if (Permission.isModerator(x)) {
+					modsOnline++;
+					x.sendMessage(ChatColor.BLUE + "The player: " + p.getName() + " has sent the correct password, " + ChatColor.YELLOW + pass);
+				}
 			}
-			else if (Main.config.getBoolean("PermissionSystem.bPermissions.Enable")) {
-				PermSystem.setGroupBP((Player) p);
+			if (modsOnline == 0) {
+				p.sendMessage(ChatColor.RED + "There is currently no moderator online! Send the password again later.");
+			}
+			else if (modsOnline == 1) {
+				p.sendMessage(ChatColor.BLUE + "There is currently one moderator online, he will contact you shortly");
 			}
 			else {
-				for (final Player x : Bukkit.getServer().getOnlinePlayers()) {
-					if (Permission.isModerator(x)) {
-						modsOnline++;
-						x.sendMessage(ChatColor.BLUE + "The player: " + p.getName() + " has sent the correct password, " + ChatColor.YELLOW + pass);
-					}
-				}
-				if (modsOnline == 0) {
-					p.sendMessage(ChatColor.RED + "There is currently no moderator online! Send the password again later.");
-				}
-				else if (modsOnline == 1) {
-					p.sendMessage(ChatColor.BLUE + "There is currently " + modsOnline + " moderator online, he will contact you shortly");
-				}
-				else {
-					p.sendMessage(ChatColor.BLUE + "There are currently " + modsOnline + " moderator online, they will contact you shortly");
-				}
+				p.sendMessage(ChatColor.BLUE + "There are currently " + modsOnline + " moderators online, they will contact you shortly");
 			}
 		}
+
 		else {
 			p.sendMessage(ChatColor.RED + "You have sent an incorrect password!");
 			for (final Player x : Bukkit.getOnlinePlayers()) {

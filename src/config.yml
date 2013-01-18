@@ -14,9 +14,11 @@
     # CheckForUpdate: Check for updates?
 ##########    
 # PermissionSystem section: Options for various permissionplugins support #
-    # PEX/GM/BP #
-        # Enable: Enable the auto-moving for that perm-plugin? #
-        # BuildGroup: Which group the player is being moved to? #
+    # Vault: 
+        # Enable: Use Vault? (If false, automatic group-moving will NOT work)
+        # BuildGroup: Groupname for your build-group, a player that enters the correct password will be moved to this group if "Enable" is true
+        # UseSpecificWorld: If true, GuestUnlock will add the player to "BuildGroup" only in the "main-world". Must be true for plugins like bPermissions.
+        # RemoveOldGroup: Would you like to remove the old group for the player so he only has the "BuildGroup"? (Recommended true)
 Guest:
     JoinMessage: Welcome Guest, please read the rules, then send the password /guestunlock <password>
     Message: Welcome Guest, please read the rules, then send the password /guestunlock <password>
@@ -28,12 +30,8 @@ Admin:
     CheckForPass: false
     CheckForUpdate: true
 PermissionSystem:
-    PermissionsEx:
-        Enable: false
+    Vault:
+        Enable: true
         BuildGroup: builder
-    GroupManager:
-        Enable: false
-        BuildGroup: Builder
-    bPermissions:
-        Enable: false 
-        BuildGroup: builder
+        UseSpecificWorld: true
+        RemoveOldGroup: false
