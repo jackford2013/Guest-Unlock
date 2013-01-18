@@ -33,7 +33,7 @@ public class Main extends JavaPlugin {
 	/**
 	 * The Main logger used to contact the console
 	 */
-	private static final Logger		LOG		= Logger.getLogger("GuestUnlock");
+	private static Logger		log;
 
 	/**
 	 * The Main config used to contact the config.yml
@@ -48,11 +48,6 @@ public class Main extends JavaPlugin {
 	 * Initialized in onEnable()
 	 */
 	public static PluginManager		pm;
-
-	/**
-	 * The Prefix for the logger
-	 */
-	private static final String		PREFIX	= "[GuestUnlock] ";
 
 	/**
 	 * The current version of GU
@@ -89,6 +84,8 @@ public class Main extends JavaPlugin {
 	 */
 	@Override
 	public void onEnable() {
+		log = this.getLogger();
+		
 		config = getConfig();
 		DEBUG("Getting config");
 
@@ -143,7 +140,7 @@ public class Main extends JavaPlugin {
 	 *            - Message to print
 	 */
 	public static final void INFO(final String msg) {
-		LOG.info(PREFIX + msg);
+		log.info(msg);
 	}
 
 	/**
@@ -153,7 +150,7 @@ public class Main extends JavaPlugin {
 	 *            - Message to print
 	 */
 	public static final void WARNING(final String msg) {
-		LOG.warning(PREFIX + msg);
+		log.warning(msg);
 	}
 
 	/**
@@ -163,7 +160,7 @@ public class Main extends JavaPlugin {
 	 *            - Message to print
 	 */
 	public static final void SEVERE(final String msg) {
-		LOG.severe(PREFIX + msg);
+		log.severe(msg);
 	}
 
 	/**
@@ -176,7 +173,7 @@ public class Main extends JavaPlugin {
 	 */
 	public static final void DEBUG(final String msg) {
 		if (config.getBoolean("Admin.Debug")) {
-			LOG.info(PREFIX.concat(" DEBUG: ") + msg);
+			log.info(" DEBUG: " + msg);
 		}
 	}
 	
