@@ -101,7 +101,7 @@ public class Main extends JavaPlugin {
 		getCommand("guestunlock").setExecutor(commandEx);
 		getCommand("gupassword").setExecutor(commandEx);
 	
-		if(config.getBoolean("PermissionSystem.Vault.Enable")) {
+		if(config.getBoolean("PermissionSystem.Vault.Enable") && pm.isPluginEnabled("Vault")) {
 			if(hookIntoVault()) {
 				hookedIntoVault = true;
 				DEBUG("Sucessfully hooked into Vault!");
