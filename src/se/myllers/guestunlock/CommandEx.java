@@ -46,6 +46,10 @@ public class CommandEx implements org.bukkit.command.CommandExecutor {
 					cs.sendMessage(ChatColor.RED + "You do not have sufficient permissions, or you formatted the command badly");
 					return true;
 				}
+			} 
+			else {
+				cs.sendMessage(ChatColor.RED + "You do not have sufficient permissions!");
+				return true;
 			}
 		}
 		else if (cs instanceof ConsoleCommandSender) {

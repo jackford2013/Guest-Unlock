@@ -17,7 +17,9 @@ public class PermSystem {
 			final String groupName = Main.perms.getPrimaryGroup(player);
 			if (Main.perms.playerAddGroup(player.getWorld().getName(), player.getName(), Main.config.getString("PermissionSystem.Vault.BuildGroup"))) {
 				
-				Main.perms.playerRemoveGroup(player.getWorld().getName(), player.getName(), groupName);
+				if(Main.config.getBoolean("PermissionSystem.Vault.RemoveOldGroup")) {
+					Main.perms.playerRemoveGroup(player.getWorld().getName(), player.getName(), groupName);
+				}
 				player.sendMessage(ChatColor.YELLOW + "You have been moved to the build group!");
 				Main.INFO("Set " + player.getName() + "s group to the one specifyed in config.yml");
 				onGroupChange(player);
@@ -27,7 +29,11 @@ public class PermSystem {
 			}
 		}
 		else {
+			final String groupName = Main.perms.getPrimaryGroup(player);
 			if (Main.perms.playerAddGroup((String) null, player.getName(), Main.config.getString("PermissionSystem.Vault.BuildGroup"))) {
+				if(Main.config.getBoolean("PermissionSystem.Vault.RemoveOldGroup")) {
+					Main.perms.playerRemoveGroup(player.getWorld().getName(), player.getName(), groupName);
+				}
 				player.sendMessage(ChatColor.YELLOW + "You have been moved to the build group!");
 				Main.INFO("Set " + player.getName() + "s group to the one specifyed in config.yml [NON WORLD SPECIFIC]");
 				onGroupChange(player);
