@@ -37,3 +37,6 @@ PermissionSystem:
     bPermissions:
         Enable: false 
         BuildGroup: builder
+    Vault:
+        Enable: true
+        BuildGroup: builder

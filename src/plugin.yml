@@ -1,23 +1,26 @@
 name: GuestUnlock
 main: se.myllers.guestunlock.Main
 version: 3.3.6
+author: Myller
+website: http://tehwarriors.net
+softdepend: [Vault]
 description: >
              This plugin is used to send a message to admins when a player types the correct password.
 commands:
   guestunlock:
     description: Sends password to admins
-    usage: /<command> [Password]
+    usage: /<command> [password]
     aliases: [gunlock, gu]
   gupassword:
     description: Changes the correct password
-    usage: /<command> [New Password]
+    usage: /<command> [new password]
     aliases: [gadmin, gpassword]
 permissions:
   guestunlock.guest:
     description: Seen as a Guest
     default: false
   guestunlock.moderator:
-    description: See message when someone sends the correct password
+    description: Recieve informative messages
     default: false
   guestunlock.admin:
     description: Change the password

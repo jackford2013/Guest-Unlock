@@ -20,9 +20,12 @@ package se.myllers.guestunlock;
 
 import java.util.logging.Logger;
 
+import net.milkbowl.vault.permission.Permission;
+
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -55,6 +58,10 @@ public class Main extends JavaPlugin {
 	 * The current version of GU
 	 */
 	private static String			version;
+	
+	public static Permission 		perms;
+	
+	public static boolean hookedIntoVault = false;
 
 	/**
 	 * Called when the plugin is disabled
@@ -96,16 +103,16 @@ public class Main extends JavaPlugin {
 		final CommandEx commandEx = new CommandEx();
 		getCommand("guestunlock").setExecutor(commandEx);
 		getCommand("gupassword").setExecutor(commandEx);
-
-		DEBUG("Checking if PermSystem is enabled");
-		if (config.getBoolean("PermissionSystem.PermissionsEx.Enable")) {
-			PermSystem.getPEX();
-		}
-		else if (config.getBoolean("PermissionSystem.GroupManager.Enable")) {
-			PermSystem.getGM();
-		}
-		else if (config.getBoolean("PermissionSystem.bPermissions.Enable")) {
-			PermSystem.getBP();
+	
+		if(config.getBoolean("PermissionSystem.Vault.Enable")) {
+			if(hookIntoVault()) {
+				hookedIntoVault = true;
+				DEBUG("Sucessfully hooked into Vault!");
+			}
+		} 
+		else {
+			hookedIntoVault = false;
+			DEBUG("Did not hook into Vault");
 		}
 
 		DEBUG("Starting RepeatingTask");
@@ -171,5 +178,11 @@ public class Main extends JavaPlugin {
 		if (config.getBoolean("Admin.Debug")) {
 			LOG.info(PREFIX.concat(" DEBUG: ") + msg);
 		}
+	}
+	
+	private final boolean hookIntoVault() {
+	        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
+	        perms = rsp.getProvider();
+	        return perms != null;
 	}
 }
