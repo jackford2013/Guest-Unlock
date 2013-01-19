@@ -1,4 +1,13 @@
+# Directories
 /bin
 /.classpath
 /.settings
 /.project
+
+# Binary files/Package files
+*.class
+*.jar
+
+# Eclipse project files
+.classpath
+.project
