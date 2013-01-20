@@ -18,6 +18,7 @@
 
 package se.myllers.guestunlock;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.permission.Permission;
@@ -130,6 +131,15 @@ public class Main extends JavaPlugin {
 
 		if (config.getBoolean("Admin.CheckForPass")) {
 			Listener.enableChat = true;
+		}
+		
+		try {
+			MetricsLite meL = new MetricsLite(this);
+			meL.start();
+			DEBUG("Started PluginMetrics");
+		} 
+		catch (IOException ioe) {
+			SEVERE("Failed to start PluignMetrics: " + ioe.getMessage());
 		}
 	}
 

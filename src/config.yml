@@ -1,29 +1,15 @@
 ##################################################
 ###       Configuration for GuestUnlock!       ###
 ##################################################
+# 
+# For information on how to configure this pluign please see 
+# http://dev.bukkit.org/server-mods/guestunlock/pages/configuration
 #
-# Guest section: Options for Guests(player with perm: guestunlock.guest) #
-    # JoinMessage: Message displayed for guest when they join #
-    # Message: Message displayed at the specifyed interval for guests #
-    # MessageInterval: Interval the Message is displayed at #
-##########
-# Admin section: Options for the plugins functionality #
-    # Password: The correct password #
-    # Debug: Debug? #
-    # CheckForPass: Wether to check for the password in chat-messages? And if it is there remove it #
-    # CheckForUpdate: Check for updates?
-##########    
-# PermissionSystem section: Options for various permissionplugins support #
-    # Vault: 
-        # Enable: Use Vault? (If false, automatic group-moving will NOT work)
-        # BuildGroup: Groupname for your build-group, a player that enters the correct password will be moved to this group if "Enable" is true
-        # UseSpecificWorld: If true, GuestUnlock will add the player to "BuildGroup" only in the "main-world". Must be true for plugins like bPermissions.
-        # RemoveOldGroup: Would you like to remove the old group for the player so he only has the "BuildGroup"? (Recommended true)
+##################################################
 Guest:
     JoinMessage: Welcome Guest, please read the rules, then send the password /guestunlock <password>
     Message: Welcome Guest, please read the rules, then send the password /guestunlock <password>
     MessageInterval: 30
-
 Admin:
     Password: guestunlock
     Debug: false

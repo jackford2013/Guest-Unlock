@@ -1,6 +1,6 @@
 name: GuestUnlock
 main: se.myllers.guestunlock.Main
-version: 3.4.0
+version: 3.4.1
 author: Myller
 website: http://tehwarriors.net
 softdepend: [Vault]
