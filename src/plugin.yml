@@ -1,8 +1,7 @@
 name: GuestUnlock
-main: se.myllers.guestunlock.Main
+main: se.jackford2013.guestunlock
 version: 3.4.1
-author: Myller
-website: http://tehwarriors.net
+author: jackford2013
 softdepend: [Vault]
 description: >
              This plugin is used to send a message to admins when a player types the correct password.
